@@ -1,6 +1,11 @@
 
+figure { 
+    display: inline-block;
+}
+.mid td {
+    vertical-align: middle;
+}
 img {
-    display: block; 
     height: auto; 
     max-width: 100%;
 }
@@ -19,8 +24,8 @@ code {
     text-align: left;
 }
 .btn-info {
-    background-color: #0072C6;
-    border-color: #0072C6;
+    background-color: #a3111e;
+    border-color: #a3111e;
 }
 .btn {
     border:none;
@@ -32,7 +37,7 @@ code {
     border-radius:3px;
 }
 .teal {
-    color:  #0072C6;
+    color:  #a3111e;
 }  
 h2 {
     font-size:1.8rem;
@@ -43,7 +48,7 @@ h3 {
     font-weight: 600;
 }
 a {
-    color: #0072C6;
+    color: #a3111e;
     font-weight: 600;
 }
 body {
