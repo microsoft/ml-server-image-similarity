@@ -122,6 +122,12 @@ def get_label_levels(feature_table, conn_str):
         levels.append(str(int(key)))
     return levels
 
+def get_image_path(image_table, connection_string):
+    query = 'SELECT (FILETABLEROOTPATH() + [file_stream].GetFileNamespacePath()) as image FROM ' + image_table + " WHERE is_directory = 0"
+    filetable_sql = RxSqlServerData(sql_query=query, connection_string=connection_string)
+    imageData = rx_import(filetable_sql, strings_as_factors=False)
+    return imageData
+
 def get_image_label(path, lutLabel2Id):
     pathitems = path.split('\\')
     label = lutLabel2Id[pathitems[len(pathitems) - 2]]

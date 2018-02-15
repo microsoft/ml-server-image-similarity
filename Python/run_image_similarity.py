@@ -2,7 +2,7 @@ from image_similarity.image_similarity_utils import *
 from microsoftml import rx_neural_network, sgd_optimizer, rx_predict, concat
 import pandas as pd
 from revoscalepy import RxSqlServerData, rx_data_step, rx_import
-from Python.parameters import *
+from parameters import *
 
 #featurize images using pre-trained DNN model
 def featurize_images(conn_str, image_table, feature_table):
@@ -89,7 +89,7 @@ def rank_candidates(conn_str, query_table, model_table, results_table):
     rank_candiate_images(conn_str, queryImageVector, candidateImageVector, TOP_K_CANDIDATES, results_table)
 
 if __name__ == "__main__":
-    conn_str = "DRIVER={SQL Server};SERVER=localhost;PORT=1433;DATABASE=ImageSimilarity;TRUSTED_CONNECTION=True"
+    conn_str = "DRIVER={SQL Server};SERVER=localhost;PORT=1433;DATABASE=ImageSimilarity_Py;TRUSTED_CONNECTION=True"
     featurize_images(conn_str, TABLE_IMAGES, TABLE_FEATURE)
     prepare_data(conn_str, TABLE_FEATURE, TABLE_TRAINING, TABLE_TESTING, TABLE_RANKING, maxQueryImgsPerSubdir, maxNegImgsPerQueryImg, ratioTrainTest)
     train_classifier(conn_str, TABLE_FEATURE, TABLE_TRAINING, TABLE_TESTING, TABLE_SCORE, TABLE_MODEL, DNNOutputDimension)

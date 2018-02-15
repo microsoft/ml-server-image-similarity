@@ -8,7 +8,7 @@ The first step is to download [SQL Server 2017 ctp](https://www.microsoft.com/en
 
 To test that python is working correctly, make sure that the library `revoscalepy` and `microsoftml` can be loaded. To test it, go to the installation folder and look for `python.exe` inside `PYTHON_SERVICES` folder.
 
-	cd "C:\Program Files\Microsoft SQL Server\YOUR-MSSQL-SERVER-INSTANCE-FOLDER\PYTHON_SERVICES"
+	Set-Location "C:\Program Files\Microsoft SQL Server\YOUR-MSSQL-SERVER-INSTANCE-FOLDER\PYTHON_SERVICES"
 	python.exe -c "import revoscalepy, microsoftml"
 
 You have to add this folder (`C:\Program Files\Microsoft SQL Server\YOUR-MSSQL-SERVER-INSTANCE-FOLDER\PYTHON_SERVICES`) to the windows path.
@@ -23,6 +23,6 @@ Then you need to restart SQL Server. Right click on the server and then restart.
 #### Install image similarity libraries
 The last step is to install the image similarity libraries. You have to go to the folder where you defined the libraries and modified the file [configuration_settings.py] with your credentials of SQL Server. Once the credentials are changed, execute from there:
 
-	cd PATH-TO-IMAGE-SIMILARITY-SQL-Python-CODE
+	Set-Location PATH-TO-IMAGE-SIMILARITY-SQL-Python-CODE
 	"C:\Program Files\Microsoft SQL Server\YOUR-MSSQL-SERVER-INSTANCE-FOLDER\PYTHON_SERVICES\python.exe" setup.py install
 

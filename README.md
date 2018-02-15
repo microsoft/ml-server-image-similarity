@@ -1,5 +1,5 @@
 
-Image Similarity Ranking using SQL Server Machine Learning Service
+# Image Similarity Ranking using SQL Server Machine Learning Service
 ==============
 
 DESCRIPTION
@@ -15,17 +15,17 @@ and hand-annotated.
 The figure below shows examples for the 11 categories.
 
 <p align="center">
-<img src="resources/152.jpg" alt="alt text" height="150"/>
-<img src="resources/403.jpg" alt="alt text" height="150"/>
-<img src="resources/319.jpg" alt="alt text" height="150"/>
-<img src="resources/253.jpg" alt="alt text" height="150"/>
-<img src="resources/352.jpg" alt="alt text" height="150"/>
-<img src="resources/241.jpg" alt="alt text" height="150"/>
-<img src="resources/111.jpg" alt="alt text" height="150"/>
-<img src="resources/1248.jpg" alt="alt text" height="150"/>
-<img src="resources/700.jpg" alt="alt text" height="150"/>
-<img src="resources/736.jpg" alt="alt text" height="150"/>
-<img src="resources/75.jpg" alt="alt text" height="150"/>
+<img src="Resources/imgages/152.jpg" alt="alt text" height="150"/>
+<img src="Resources/imgages/403.jpg" alt="alt text" height="150"/>
+<img src="Resources/imgages/319.jpg" alt="alt text" height="150"/>
+<img src="Resources/imgages/253.jpg" alt="alt text" height="150"/>
+<img src="Resources/imgages/352.jpg" alt="alt text" height="150"/>
+<img src="Resources/imgages/241.jpg" alt="alt text" height="150"/>
+<img src="Resources/imgages/111.jpg" alt="alt text" height="150"/>
+<img src="Resources/imgages/1248.jpg" alt="alt text" height="150"/>
+<img src="Resources/imgages/700.jpg" alt="alt text" height="150"/>
+<img src="Resources/imgages/736.jpg" alt="alt text" height="150"/>
+<img src="Resources/imgages/75.jpg" alt="alt text" height="150"/>
 </p>
 
 This code was tested using SQL Server 2017, and assumes that SQL Server with Python Service was installed. The installation process can be found [here](install.md).
@@ -112,7 +112,7 @@ their similarity so that we can evaluate the performance of the model in terms o
 4. Ranking performance on evaluation images.
 
     <p align="center">
-    <img src="resources/ranking_performance.jpg" alt="alt text" height="300"/>
+    <img src="Resources/imgages/ranking_performance.jpg" alt="alt text" height="300"/>
     </p>
 
 ### Step 5: Ranking candidates for each query image
@@ -151,7 +151,7 @@ The following table shows a sample results in result table `@results_table`.
 
 ### End-to-end run
 
-We provide a powershell script [run_image_similarity.ps1](SQLPy/run_image_similarity.ps1) to run all the steps including create the database, create the FileTable and copy all the images into the directory of FileTable.
+We provide a powershell script SetupVM.ps1 to run all the steps including create the database, create the FileTable and copy all the images into the directory of FileTable.
 Please follow [here](https://docs.microsoft.com/en-us/sql/relational-databases/blob/enable-the-prerequisites-for-filetable) to enable FILESTREAM at the SQL instance level.
 
 
