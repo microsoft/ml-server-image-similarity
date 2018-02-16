@@ -222,7 +222,7 @@ $RequireCuUpdate = $RequireCuUpdate.Item(0)
 
 IF ($RequireCuUpdate -eq 0) 
 {
-WRITE-Host " CU Needs Updating will be done at end of Script"
+WRITE-Host "CU Needs Updating will be done at end of Script"
 }
 ELSE 
 {Write-Host "CU is Current" }
@@ -233,14 +233,14 @@ ELSE
 $ConfigureSql = "C:\Solutions\$SolutionName\Resources\ActionScripts\ConfigureSQL.ps1  $ServerName $SolutionName $InstallPy $InstallR $EnableFileStream $Prompt"
 Invoke-Expression $ConfigureSQL 
 
-Write-Host -ForegroundColor 'Cyan' " Done with configuration changes to SQL Server"
+Write-Host "Done with configuration changes to SQL Server"
 
 
 
 
 If ($UsePowerBI -eq 'Yes') 
 {
-    Write-Host -ForeGroundColor cyan " Installing latest Power BI..."
+    Write-Host "Installing latest Power BI..."
     # Download PowerBI Desktop installer
     Start-BitsTransfer -Source "https://go.microsoft.com/fwlink/?LinkId=521662&clcid=0x409" -Destination powerbi-desktop.msi
 
