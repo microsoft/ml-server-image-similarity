@@ -20,14 +20,11 @@ param(
 )
 $startTime = Get-Date
 
+$Query = "SELECT SERVERPROPERTY('ServerName')"
+$si = invoke-sqlcmd -Query $Query
+$si = $si.Item(0)
 
-$si = $Query = "Select SERVERPROPERTY ( 'ServerName' )"
-Invoke-Sqlcmd -Query $Query 
-
-if ([string]::IsNullOrEmpty($servername))
-{
-$serverName = $si
-}
+$serverName = if([string]::IsNullOrEmpty($servername)) {$si}
 
 $setupLog = "c:\tmp\setup_log.txt"
 Start-Transcript -Path $setupLog -Append
@@ -72,14 +69,7 @@ $SolutionData = $SolutionPath + "\Data\"
 
 
 
-####$Query = "SELECT SERVERPROPERTY('ServerName')"
-##$si = invoke-sqlcmd -Query $Query
-##$si = $si.Item(0)
 
-
-###$serverName = if($serverName -eq $null) {$si}
-
-##WRITE-HOST " ServerName set to $ServerName"
 
 
 
