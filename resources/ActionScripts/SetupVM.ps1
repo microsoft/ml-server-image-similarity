@@ -106,10 +106,10 @@ Write-Host "Installing SQLServer Power Shell Module or Updating to latest "
 
 #   if (Get-Module -ListAvailable -Name SQLServer) {Write-Host "SQL Powershell Module Already Installed"}
 #     ELSE 
-   {
-     Install-Module -Name SQLServer -Scope AllUsers -AllowClobber -Force
-     Import-Module SqlServer -Version 21.0.17178
-   }
+    Uninstall-Module -Name SQLServer  -Force
+    Install-Module -Name SQLServer -Scope AllUsers -AllowClobber -Force
+    Import-Module SqlServer
+   
 
 
 
