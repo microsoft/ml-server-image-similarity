@@ -28,6 +28,13 @@ if ([string]::IsNullOrEmpty($servername))
 {
 $serverName = $si
 }
+
+$setupLog = "c:\tmp\setup_log.txt"
+Start-Transcript -Path $setupLog -Append
+$startTime = Get-Date
+Write-Host  "Start time:" $startTime 
+
+
 Write-Host "ServerName set to $ServerName"
 
 #$Prompt= if ($Prompt -match '^y(es)?$') {'Y'} else {'N'}
@@ -51,10 +58,7 @@ $UsePowerBI = 'No' ## If Solution uses PowerBI
 $Prompt = 'N'
 $MixedAuth = 'No'
 
-$setupLog = "c:\tmp\setup_log.txt"
-Start-Transcript -Path $setupLog -Append
-$startTime = Get-Date
-Write-Host  "Start time:" $startTime 
+
 
 
 ###These probably don't need to change , but make sure files are placed in the correct directory structure 
