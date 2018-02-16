@@ -110,10 +110,6 @@ if (Get-Module -ListAvailable -Name SQLServer) {Update-Module -Name "SQLServer"}
   }
 
 
-
-
-
-
 ## if FileStreamDB is Required Alter Firewall ports for 139 and 445
 if ($EnableFileStream -eq 'Yes')
     {
