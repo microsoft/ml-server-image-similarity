@@ -37,7 +37,7 @@ Write-Host  "Start time:" $startTime
 
 
 
-Write-Host "ServerName set to $ServerName"
+Write-Host ("ServerName set to $ServerName")
 
 #$Prompt= if ($Prompt -match '^y(es)?$') {'Y'} else {'N'}
 $Prompt = 'N'
@@ -102,14 +102,13 @@ Rscript install.R
 
 Write-Host "Installing SQLServer Power Shell Module or Updating to latest "
 
-# if (Get-Module -ListAvailable -Name SQLServer) {Update-Module -Name "SQLServer"}
-#  else 
-#   {
-#     Install-Module -Name SQLServer -Scope AllUsers -AllowClobber -Force
-#     Import-Module -Name SQLServer
-#   }
+if (Get-Module -ListAvailable -Name SQLServer) {Update-Module -Name "SQLServer"}
+ else 
+  {
     Install-Module -Name SQLServer -Scope AllUsers -AllowClobber -Force
-    Import-Module SqlServer
+    Import-Module -Name SQLServer
+  }
+
 
 
 
