@@ -104,8 +104,8 @@ Write-Host "Installing SQLServer Power Shell Module or Updating to latest "
 #     Import-Module -Name SQLServer
 #   }
 
-  if (!Get-Module -ListAvailable -Name SQLServer)
- 
+  if (Get-Module -ListAvailable -Name SQLServer) {Write-Host "SQL Powershell Module Already Installed"}
+    ELSE 
    {
      Install-Module -Name SQLServer -Scope AllUsers -AllowClobber -Force
      Import-Module -Name SQLServer
