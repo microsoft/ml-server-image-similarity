@@ -70,9 +70,6 @@ $SolutionData = $SolutionPath + "\Data\"
 
 
 
-
-
-
 ##########################################################################
 #Clone Data from GIT
 ##########################################################################
@@ -100,12 +97,21 @@ Rscript install.R
 
 Write-Host "Installing SQLServer Power Shell Module or Updating to latest "
 
-#if (Get-Module -ListAvailable -Name SQLServer) {Update-Module -Name "SQLServer"}
- #else 
-  #  {
-    Install-Module -Name SQLServer -Scope AllUsers -AllowClobber -Force
-    Import-Module -Name SQLServer
-   # }
+# if (Get-Module -ListAvailable -Name SQLServer) {Update-Module -Name "SQLServer"}
+#  else 
+#   {
+#     Install-Module -Name SQLServer -Scope AllUsers -AllowClobber -Force
+#     Import-Module -Name SQLServer
+#   }
+
+  if (!Get-Module -ListAvailable -Name SQLServer)
+ 
+   {
+     Install-Module -Name SQLServer -Scope AllUsers -AllowClobber -Force
+     Import-Module -Name SQLServer
+   }
+
+
 
 
 ## if FileStreamDB is Required Alter Firewall ports for 139 and 445

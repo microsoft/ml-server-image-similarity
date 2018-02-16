@@ -230,38 +230,17 @@ Write-Host "Copy Image Files into FileStream Table"
 
     Write-Host " Image Files Copied to FileStream Table" 
 
-
-try
-{
-
 Write-Host -ForeGroundColor 'cyan' (" Import CSV File(s). This Should take about 30 Seconds Per File")
 
-
 # upload csv files into SQL tables
-#foreach ($dataFile in $dataList)
-{
-#     $destination = $SolutionData + $dataFile + ".csv" 
-#     $tableName = $DBName + ".dbo." + $dataFile
-#     $tableSchema = $dataPath + "\" + $dataFile + ".xml"
-#     $dataSet = Import-Csv $destination
-#  Write-Host -ForegroundColor 'cyan' ("         Loading $dataFile.csv into SQL Table") 
-#     Write-SqlTableData -InputData $dataSet  -DatabaseName $dbName -Force -Passthru -SchemaName dbo -ServerInstance $ServerName -TableName $dataFile
-
     $qry = "BULK INSERT Query_Images FROM 'C:\Solutions\ImageSimilarity\Data\query_images.csv'"
     Invoke-Sqlcmd -ServerInstance LocalHost -Database $dbName -Query $qry -ConnectionTimeout  0 -QueryTimeout 0
  Write-Host -ForeGroundColor 'cyan' (" $datafile table loaded from CSV File(s).")
-}
-}
-catch
-{
-Write-Host -ForegroundColor DarkYellow "Exception in populating database tables:"
-Write-Host -ForegroundColor Red $Error[0].Exception 
-throw
-}
+
 Write-Host -ForeGroundColor 'cyan' (" Finished loading .csv File(s).")
 
 Write-Host -ForeGroundColor 'Cyan' (" Training Model and Scoring Data...")
-$query = "EXEC Inital_Run_Once_Py"
+##$query = "EXEC Inital_Run_Once_Py"
 ##SqlServer\Invoke-Sqlcmd -ServerInstance LocalHost -Database $dbName -Query $query -ConnectionTimeout  0 -QueryTimeout 0
 Set-Location "C:\Solutions\ImageSimilarity\Python"
 Invoke-Expression ".\run_image_similarity.bat"
