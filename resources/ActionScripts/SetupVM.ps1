@@ -2,7 +2,7 @@
 
 [CmdletBinding()]
 param(
-[parameter(Mandatory=$True, Position=1)]
+[parameter(Mandatory=$false, Position=1)]
 [ValidateNotNullOrEmpty()] 
 [string]$serverName,
 
@@ -20,6 +20,15 @@ param(
 )
 $startTime = Get-Date
 
+
+$si = $Query = "Select SERVERPROPERTY ( 'ServerName' )"
+Invoke-Sqlcmd -Query $Query 
+
+if ([string]::IsNullOrEmpty($servername))
+{
+$serverName = $si
+}
+Write-Host "ServerName set to $ServerName"
 
 #$Prompt= if ($Prompt -match '^y(es)?$') {'Y'} else {'N'}
 $Prompt = 'N'
@@ -45,7 +54,7 @@ $MixedAuth = 'No'
 $setupLog = "c:\tmp\setup_log.txt"
 Start-Transcript -Path $setupLog -Append
 $startTime = Get-Date
-Write-Host -ForegroundColor 'Green'  "  Start time:" $startTime 
+Write-Host  "Start time:" $startTime 
 
 
 ###These probably don't need to change , but make sure files are placed in the correct directory structure 
@@ -82,7 +91,7 @@ ELSE {Invoke-Expression $clone}
 
 If ($InstalR -eq 'Yes')
 {
-Write-Host -ForeGroundColor magenta "Installing R Packages"
+Write-Host "Installing R Packages"
 Set-Location "C:\Solutions\$SolutionName\Resources\ActionScripts\"
 # install R Packages
 Rscript install.R 
@@ -95,7 +104,7 @@ Rscript install.R
 
 
 
-Write-Host " Installing SQLServer Power Shell Module or Updating to latest "
+Write-Host "Installing SQLServer Power Shell Module or Updating to latest "
 
 #if (Get-Module -ListAvailable -Name SQLServer) {Update-Module -Name "SQLServer"}
  #else 
@@ -110,7 +119,7 @@ if ($EnableFileStream -eq 'Yes')
     {
     netsh advfirewall firewall add rule name="Open Port 139" dir=in action=allow protocol=TCP localport=139
     netsh advfirewall firewall add rule name="Open Port 445" dir=in action=allow protocol=TCP localport=445
-    Write-Host -ForeGroundColor cyan " Firewall has been opened for filestream access..."
+    Write-Host "Firewall has been opened for filestream access..."
     }
 
  
@@ -131,13 +140,13 @@ If ($MixedAuth -eq 'Yes')
 Invoke-Sqlcmd -Query "EXEC xp_instance_regwrite N'HKEY_LOCAL_MACHINE', N'Software\Microsoft\MSSQLServer\MSSQLServer', N'LoginMode', REG_DWORD, 2;" -ServerInstance "LocalHost" 
 }
 
-Write-Host -ForeGroundColor 'cyan' " Configuring SQL to allow running of External Scripts "
+Write-Host "Configuring SQL to allow running of External Scripts "
 ### Allow Running of External Scripts , this is to allow R Services to Connect to SQL
 Invoke-Sqlcmd -Query "EXEC sp_configure  'external scripts enabled', 1"
 
 ### Force Change in SQL Policy on External Scripts 
 Invoke-Sqlcmd -Query "RECONFIGURE WITH OVERRIDE" 
-Write-Host -ForeGroundColor 'cyan' " SQL Server Configured to allow running of External Scripts "
+Write-Host " SQL Server Configured to allow running of External Scripts "
 
 ### Enable FileStreamDB if Required by Solution 
 if ($EnableFileStream -eq 'Yes') 
@@ -158,7 +167,7 @@ if ($EnableFileStream -eq 'Yes')
     }
 ELSE
     { 
-    Write-Host -ForeGroundColor 'cyan' " Restarting SQL Services "
+    Write-Host "Restarting SQL Services "
     ### Changes Above Require Services to be cycled to take effect 
     ### Stop the SQL Service and Launchpad wild cards are used to account for named instances  
     Restart-Service -Name "MSSQ*" -Force
@@ -184,13 +193,13 @@ if($InstallPy -eq 'Yes')
 $src= "C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\Lib\site-packages\microsoftml\mxLibs\resnet*"
 $dest= "C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\PYTHON_SERVICES\Lib\site-packages\microsoftml\mxLibs"
 copy-item $src $dest
-Write-Host -ForegroundColor 'Cyan' " Done with copying ResNet models"
+Write-Host "Done with copying ResNet models"
 
 # install package for both SQL and ML python
 Set-Location $SolutionPath\Resources\ActionScripts
 $installPyPkg = ".\installPyPkg.bat c:\Solutions\ImageSimilarity"
 Invoke-Expression $installPyPkg 
-Write-Host -ForegroundColor 'Cyan' " Done installing image_similarity package"
+Write-Host "Done installing image_similarity package"
 
 ##### End of section for ImageSimilarity
 
