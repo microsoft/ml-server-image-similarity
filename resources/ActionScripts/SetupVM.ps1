@@ -75,7 +75,7 @@ $SolutionData = $SolutionPath + "\Data\"
 ##########################################################################
 
 
-$clone = "git clone --branch $Branch --single-branch https://github.com/Microsoft/ml-server-image-similarity $solutionPath"
+$clone = "git clone --branch $Branch --single-branch https://github.com/Microsoft/$SolutionFullName $solutionPath"
 
 if (Test-Path $SolutionPath) { Write-Host " Solution has already been cloned"}
 ELSE {Invoke-Expression $clone}
@@ -210,7 +210,6 @@ ELSE 0
 END "
 $RequireCuUpdate = Invoke-Sqlcmd -Query $Query
 $RequireCuUpdate = $RequireCuUpdate.Item(0)
-$RequireCuUpdate 
 
 IF ($RequireCuUpdate -eq 0) 
 {
@@ -219,8 +218,6 @@ WRITE-Host " CU Needs Updating will be done at end of Script"
 ELSE 
 {Write-Host "CU is Current" }
 
-# IF ($RequireCuUpdate -eq 0) 
-# {Invoke-Expression "shutdown /f /r"}
 
 
 ####Run Configure SQL to Create Databases and Populate with needed Data
@@ -295,21 +292,6 @@ if($SampleWeb  -eq "Yes")
 
 
 
-
-
-
-$endTime = Get-Date
-
-Write-Host -foregroundcolor 'green'(" $SolutionFullName Workflow Finished Successfully!")
-$Duration = New-TimeSpan -Start $StartTime -End $EndTime 
-Write-Host -ForegroundColor 'green'(" Total Deployment Time = $Duration") 
-
-
-
-
-##Launch HelpURL 
-Start-Process "https://microsoft.github.io/$SolutionFullName/Typical.html"
-
 IF ($RequireCuUpdate -eq 0) 
 {
 WRITE-Host "Downloading Latest CU"
@@ -331,6 +313,17 @@ Write-Host " Powershell nap time is over"
 
 ##Write-Host "CU has been Installed"
 }
+
+##Launch HelpURL 
+Start-Process "https://microsoft.github.io/$SolutionFullName/Typical.html"
+
+$endTime = Get-Date
+
+Write-Host -foregroundcolor 'green'(" $SolutionFullName Workflow Finished Successfully!")
+$Duration = New-TimeSpan -Start $StartTime -End $EndTime 
+Write-Host -ForegroundColor 'green'(" Total Deployment Time = $Duration") 
+
+
 Stop-Transcript
 
 ## Close Powershell 
