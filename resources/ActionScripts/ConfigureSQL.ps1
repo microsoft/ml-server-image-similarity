@@ -221,6 +221,20 @@ $dbname = $db + "_Py"
 # Deployment Pipeline Py
 ##########################################################################
 
+
+Write-Host ("Import CSV File(s). This Should take about 30 Seconds Per File")
+
+$Query =    "INSERT INTO [ImageSimilarity_Py].[dbo].[query_images] VALUES (0,'C:\Solutions\ImageSimilarity\data\fashionTexture\zebra\3135.jpg')
+            INSERT INTO [ImageSimilarity_Py].[dbo].[query_images] VALUES (0,'C:\Solutions\ImageSimilarity\data\fashionTexture\floral\2562.jpg')
+            INSERT INTO [ImageSimilarity_Py].[dbo].[query_images] VALUES (0,'C:\Solutions\ImageSimilarity\data\fashionTexture\leopard\3093.jpg')"
+
+Invoke-Sqlcmd -ServerInstance $ServerName -Database $dbName -Query $query 
+
+
+
+
+
+
 ### Copy Image Files
 Write-Host "Copy Image Files into FileStream Table"
 
@@ -232,34 +246,34 @@ Write-Host "Copy Image Files into FileStream Table"
     Write-Host " Image Files Copied to FileStream Table" 
 
 
-try
-{
+# try
+# {
 
-Write-Host ("Import CSV File(s). This Should take about 30 Seconds Per File")
-
-
-
-# upload csv files into SQL tables
-foreach ($dataFile in $dataList)
-{
-$destination = $SolutionData + $dataFile + ".csv" 
-$tableName = $DBName + ".dbo." + $dataFile
-$tableSchema = $dataPath + "\" + $dataFile + ".xml"
-$dataSet = Import-Csv $destination
-Write-Host ("         Loading $dataFile.csv into SQL Table") 
-Write-SqlTableData -InputData $dataSet  -DatabaseName $dbName -Force -Passthru -SchemaName dbo -ServerInstance $ServerName -TableName $dataFile
+# Write-Host ("Import CSV File(s). This Should take about 30 Seconds Per File")
 
 
-Write-Host (" $datafile table loaded from CSV File(s).")
-}
-}
-catch
-{
-Write-Host -ForegroundColor DarkYellow "Exception in populating database tables:"
-Write-Host -ForegroundColor Red $Error[0].Exception 
-throw
-}
-Write-Host (" Finished loading .csv File(s).")
+
+# # upload csv files into SQL tables
+# foreach ($dataFile in $dataList)
+# {
+# $destination = $SolutionData + $dataFile + ".csv" 
+# $tableName = $DBName + ".dbo." + $dataFile
+# $tableSchema = $dataPath + "\" + $dataFile + ".xml"
+# $dataSet = Import-Csv $destination
+# Write-Host ("         Loading $dataFile.csv into SQL Table") 
+# Write-SqlTableData -InputData $dataSet  -DatabaseName $dbName -Force -Passthru -SchemaName dbo -ServerInstance $ServerName -TableName $dataFile
+
+
+# Write-Host (" $datafile table loaded from CSV File(s).")
+# }
+# }
+# catch
+# {
+# Write-Host -ForegroundColor DarkYellow "Exception in populating database tables:"
+# Write-Host -ForegroundColor Red $Error[0].Exception 
+# throw
+# }
+# Write-Host (" Finished loading .csv File(s).")
 
 Write-Host (" Training Model and Scoring Data...")
 
