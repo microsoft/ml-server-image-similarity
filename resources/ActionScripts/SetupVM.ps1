@@ -20,6 +20,7 @@ param(
 )
 $startTime = Get-Date
 
+
 $Query = "SELECT SERVERPROPERTY('ServerName')"
 $si = invoke-sqlcmd -Query $Query
 $si = $si.Item(0)
@@ -29,7 +30,11 @@ $serverName = if([string]::IsNullOrEmpty($servername)) {$si}
 $setupLog = "c:\tmp\setup_log.txt"
 Start-Transcript -Path $setupLog -Append
 $startTime = Get-Date
-Write-Host  "Start time:" $startTime 
+Write-Host  "Start time:" $startTime
+
+
+
+
 
 
 Write-Host "ServerName set to $ServerName"
@@ -104,9 +109,7 @@ Write-Host "Installing SQLServer Power Shell Module or Updating to latest "
 #     Import-Module -Name SQLServer
 #   }
 
-#   if (Get-Module -ListAvailable -Name SQLServer) {Write-Host "SQL Powershell Module Already Installed"}
-#     ELSE 
-    Uninstall-Module -Name SQLServer  -Force
+   if(Get-Module -ListAvailable -Name SQLServer) {Uninstall-Module -Name SQLServer  -Force}
     Install-Module -Name SQLServer -Scope AllUsers -AllowClobber -Force
     Import-Module SqlServer
    
