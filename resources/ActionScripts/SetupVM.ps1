@@ -108,11 +108,9 @@ Write-Host "Installing SQLServer Power Shell Module or Updating to latest "
 #     Install-Module -Name SQLServer -Scope AllUsers -AllowClobber -Force
 #     Import-Module -Name SQLServer
 #   }
-
-   if(Get-Module -ListAvailable -Name SQLServer) {Uninstall-Module -Name SQLServer  -Force}
     Install-Module -Name SQLServer -Scope AllUsers -AllowClobber -Force
     Import-Module SqlServer
-   
+
 
 
 
