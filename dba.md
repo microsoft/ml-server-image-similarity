@@ -26,8 +26,6 @@ title: For the Database Analyst
           </div>
 </div>
 
-INTRO
-
 All the steps can be executed on SQL Server client environment (SQL Server Management Studio). We provide a Windows PowerShell script which invokes the SQL scripts and demonstrates the end-to-end modeling process.
 
 ## System Requirements
