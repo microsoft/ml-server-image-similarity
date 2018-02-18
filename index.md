@@ -10,7 +10,7 @@ For customers who prefer an on-premise solution, the implementation with Microso
 
 This solution starts with data stored in SQL Server.  The data scientist works from the convenience of an IDE on her client machine, while <a href="https://msdn.microsoft.com/en-us/library/mt604885.aspx">setting the computation context to SQL</a>.  When she is done, her code is operationalized as stored procedures in the SQL Database.
 
-A small Jupyter notebook is used to submit a new image and see the 10 most similar images returned from the model.
+A small Jupyter notebook **Test Model.ipynb** is used to submit a new image and see the 10 most similar images returned from the model.
 
-<img src="images/diagram.png">
+<img src="images/rankimages.png">
 

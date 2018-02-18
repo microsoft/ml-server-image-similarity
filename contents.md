@@ -28,7 +28,8 @@ The following is the directory structure for this template:
 
 <table class="table table-striped table-condensed">
 <tr><th> File </th><th> Description </th></tr>
-<tr><td> {{ site.jupyter_name}}  </td><td> Contains the Jupyter Notebook file that demonstrates the model. </td></tr>
+<tr><td> {{ site.jupyter_name}}  </td><td> Contains the Jupyter Notebook file that trains the model. </td></tr>
+<tr><td> Test Model.ipynb  </td><td> Contains the Jupyter Notebook file that demonstrates the model. </td></tr>
 <tr><td>copy_images_to_filetable.py  </td><td> Populates the SQL database with the image needed for training and testing the model </td></tr>
 <tr><td>parameters.py  </td><td> Parameters used in run_image_similarity.py  </td></tr>
 <tr><tdrun_image_similarity.py  </td><td> featurize images using pre-trained DNN model, prepare training/testing/evaluation image set, train a multi-class classifier and save the model into SQL table, evaluate the image ranking system using evlauation image set, and  return top K similar candidates for new query images</td></tr>
