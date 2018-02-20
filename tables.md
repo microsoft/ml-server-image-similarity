@@ -3,7 +3,7 @@ layout: default
 title: Description of Database Tables
 ---
 
-## SQL Database Tables
+## SQL Database Tables and Stored Procedures
 -----------------------
 
 Below are the data tables that you will find in your database after deployment.
@@ -54,3 +54,32 @@ Below are the data tables that you will find in your database after deployment.
         </tr>
     </tbody>
 </table>
+
+The following stored procedures are used in this solutions:
+v<table class="table" >
+	<thead>
+		<tr>
+			<th>Stored Procedure</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+	    <tr>
+        <td>EvaluateModel</td><td>Evaluates the performance of the model in terms of ranking</td>
+        </tr>
+        <tr>
+        <td>FeaturizeImages</td><td>Generates features from the images using a pre-trained Resnet in `microsoftml` </td>
+        </tr>
+        <tr>
+        <td>Initial_Run_Once_Py</td><td>Runs the training workflow natively in SQL for this solution</td>
+        </tr>
+        <tr>
+        <td>PrepareData</td><td>Creates and prepares the training/testing/evaluation image set </td>
+        </tr>
+        <tr>
+        <td>RankCandidates</td><td>Finds similar images for each query image</td>
+        </tr>
+        <tr>
+        <td>TrainClassifier</td><td>Trains a neural network model using `microsoftml` library and saves the model into SQL table </td>
+        </tr>
+        </table>

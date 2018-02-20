@@ -53,12 +53,6 @@ Follow the [PowerShell instructions](Powershell_Instructions.html) to execute al
 
 * ImageStore
 
-### Related files:
-
-* **create_imagesbase_with_filetable.sql**
-* **create_file_table.sql**
-
-
 
 ### Example:
 
@@ -86,8 +80,6 @@ The stored procedure [sp_01_featurize_images.sql](SQLPy/sp_01_featurize_images.s
 ### Output:
 * `features` table
 
-### Related files:
-* **sp_01_featurize_images.sql**
 
 ### Example:
 
@@ -117,8 +109,6 @@ This step prepares the training/testing/evaluation image set. Here is the detail
 *  `evaluation_images` table
 *  `@negImgsPerQueryImg` 
 
-### Related files:
-* **sp_02_prepare_data.sql**
 
 ### Example:
 
@@ -164,8 +154,6 @@ Once the features are computed, and the training images and testing images are i
 * `scores` table
 * `model` table
 
-### Related files:
-* **sp_04_evaluate_model.sql**
 
 ### Example:
 
@@ -191,8 +179,6 @@ their similarity so that we can evaluate the performance of the model in terms o
 ### Output:
 * accuracy measures
 
-### Related files:
-* **sp_04_evaluate_model.sql**
 
 ### Example:
 
@@ -222,9 +208,6 @@ the predicted scores of all the candidate images are already saved in SQL table 
 
 ### Output:
 * * `ranking_results` table
-
-### Related files:
-* **sp_05_rank_candidates.sql**
 
 ### Example:
 

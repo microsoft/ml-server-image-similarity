@@ -45,16 +45,18 @@ Running this PowerShell script will create the data tables and stored procedures
 
 1.  Answer `Y` if asked if it is ok to execute this script.
 
-1. This will make the following modification to your SQL Server:
-    * Installs the SQL Server PowerShell module. If this is already installed, it will update it if necessary.
-    * Installs the image_similarity package 
+1. This will make the following modification to your SQL Server:`
     * Creates the SLQRUserGroup for running R and Python code.
-    * Elevates the login user's credentials to SA.
     * Reconfigures SQL Server to allow running of external scripts.
-    * Clones the solution code and data into the c:\Solutions\{{ site.folder_name }} directory
+    * Installs the latest SQL Server 2017 Cumulative Update if no updates have been installed (this solution requires at least CU1 to run successfully).
+    * Clones the solution code and data into the c:\Solutions\{{ site.folder_name }} directory.
+    * Installs the image_similarity Python package.
     * Creates the solution database `{{ site.db_name }}` 
     * Enables FILESTREAM at the SQL instance level as described [here](https://docs.microsoft.com/en-us/sql/relational-imagesbases/blob/enable-the-prerequisites-for-filetable).
-    * Installs the latest SQL Server 2017 Cumulative Update if no updates have been installed (this solution requires at least CU1 to run successfully).
+    * Copies images to the configured filestream directory.
+    * Copies the Resnet model needed for this solution into the correct directory.d
+
+    
     
 ## Review Data
 --------------
