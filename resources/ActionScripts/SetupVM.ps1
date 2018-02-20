@@ -34,9 +34,6 @@ Write-Host  "Start time:" $startTime
 
 
 
-
-
-
 Write-Host ("ServerName set to $ServerName")
 
 #$Prompt= if ($Prompt -match '^y(es)?$') {'Y'} else {'N'}
