@@ -102,7 +102,7 @@ Rscript install.R
 
 Write-Host "Installing SQLServer Power Shell Module or Updating to latest "
 
-if (Get-Module -ListAvailable -Name SQLServer) {Update-Module -Name "SQLServer"}
+if (Get-Module -ListAvailable -Name SQLServer -Version 21.0.17199) {Write-Host "Power Shell Module is Current"}
  else 
   {
     
