@@ -319,8 +319,8 @@ Write-Host " Powershell nap time is over"
 }
 
 ##Launch HelpURL 
-Start-Process "https://microsoft.github.io/$SolutionFullName/Typical.html"
-##Start-Process "https://microsoft.github.io/ml-server-image-similarity/"
+Start-Process "https://microsoft.github.io/$SolutionFullName/"
+
 
 $endTime = Get-Date
 
