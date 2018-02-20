@@ -66,7 +66,7 @@ Then copy images into the directory `\\computer-name\MSSQLSERVER\FileTableimages
 -------------------------
 This step generates features from the images using a pre-trained Resnet in `microsoftml`. The input is the FileTable `@image_table` which contains the images, the output is the SQL Table `@feature_table` which saves the images' path, label,
 and DNN features. The dimension of the features depends on which Resnet Model is used in this step. Here we used Resnet18 which generates 512-dimensional features for each image.
-The stored procedure [sp_01_featurize_images.sql](SQLPy/sp_01_featurize_images.sql) contains three steps:
+The stored procedure `FeaturizeImages` contains three steps:
 
 1. First, get the images path from the FileTable, map the distinct categories of all the images to factor labels.
 

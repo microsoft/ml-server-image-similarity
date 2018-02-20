@@ -29,7 +29,7 @@ title: For the images Scientist
     </div>
 </div>
 
-Scientists who are testing and developing solutions can work from the convenience of their preferred IDE on their client machine, while <a href="https://msdn.microsoft.com/en-us/library/mt604885.aspx">setting the computation context to SQL</a> (see  **Python** folder for code).  They can also deploy the completed solutions to SQL Server 2017 by embedding calls to Python in stored procedures (see **SQLPy** folder for code). These solutions can then be further automated by the use of SQL Server Integration Services and SQL Server agent: a PowerShell script (.ps1 file) automates the running of the SQL code.
+Scientists who are testing and developing solutions can work from the convenience of their preferred IDE on their client machine, while <a href="https://msdn.microsoft.com/en-us/library/mt604885.aspx">setting the computation context to SQL</a> (see  **Python** folder for code).  They can also deploy the completed solutions to SQL Server 2017 by embedding calls to Python in stored procedures. These solutions can then be further automated by the use of SQL Server Integration Services and SQL Server agent: a PowerShell script (.ps1 file) automates the running of the SQL code.
 
 <a name="first"></a>
 
