@@ -38,6 +38,8 @@ All the steps can be executed on SQL Server client environment (SQL Server Manag
 -------------------
 Follow the [PowerShell instructions](Powershell_Instructions.html) to execute all the scripts described below.  [Click here](tables.html) to view the SQL database tables created in this solution.
 
+The SQL Stored procedure `Initial_Run_Once_Py` can be used to re-run steps 1-5 below.
+
  
 <a name="step0"></a>
 
@@ -47,7 +49,7 @@ Follow the [PowerShell instructions](Powershell_Instructions.html) to execute al
 
 ### Input:
 
-* Images in the directory `C:\Solution\ImageSimilarity\data\fashionTexture` are used to populate the FileTable created in this step
+* Images in the directory **C:\Solution\ImageSimilarity\data\fashionTexture** are used to populate the FileTable created in this step
 
 ### Output:
 
