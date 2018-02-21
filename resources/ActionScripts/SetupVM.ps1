@@ -298,11 +298,11 @@ IF ($RequireCuUpdate -eq 0)
 {
 WRITE-Host "Downloading Latest CU"
 
-Start-BitsTransfer -Source "https://download.microsoft.com/download/C/4/F/C4F908C9-98ED-4E5F-88D5-7D6A5004AEBD/SQLServer2017-KB4052987-x64.exe" -Destination c:\tmp\SQLServer2017-KB4052987-x64.exe  
+Start-BitsTransfer -Source "https://download.microsoft.com/download/C/4/F/C4F908C9-98ED-4E5F-88D5-7D6A5004AEBD/SQLServer2017-KB4056498-x64.exe" -Destination c:\tmp\SQLServer2017-KB4052987-x64.exe  
 
 Write-Host "CU has been Downloaded now to install , go have a cocktail as this takes a while"
 
-Invoke-Expression "c:\tmp\SQLServer2017-KB4052987-x64.exe /q /IAcceptSQLServerLicenseTerms /IACCEPTPYTHONLICENSETERMS /IACCEPTROPENLICENSETERMS /Action=Patch /InstanceName=MSSQLSERVER"
+Invoke-Expression "c:\tmp\SQLServer2017-KB4056498-x64.exe /q /IAcceptSQLServerLicenseTerms /IACCEPTPYTHONLICENSETERMS /IACCEPTROPENLICENSETERMS /Action=Patch /InstanceName=MSSQLSERVER"
 Write-Host "CU Install has commenced"
 Write-Host " Powershell time to take a nap"
 Start-Sleep -s 600
