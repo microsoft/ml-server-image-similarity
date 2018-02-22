@@ -14,5 +14,5 @@ jupyter_name: Train Model.ipynb
 # urls
 code_url: "https://github.com/Microsoft/ml-server-image-similarity"
 website_url: "https://microsoft.github.io/ml-server-image-similarity/"  
-aka_url: "http://aka.ms/hospital-los" 
+aka_url: "http://aka.ms/image-similarity" 
 
