@@ -56,7 +56,7 @@ Below are the data tables that you will find in your database after deployment.
 </table>
 
 The following stored procedures are used in this solutions:
-v<table class="table" >
+<table class="table" >
 	<thead>
 		<tr>
 			<th>Stored Procedure</th>
@@ -82,4 +82,5 @@ v<table class="table" >
         <tr>
         <td>TrainClassifier</td><td>Trains a neural network model using `microsoftml` library and saves the model into SQL table </td>
         </tr>
+        </tbody>
         </table>
