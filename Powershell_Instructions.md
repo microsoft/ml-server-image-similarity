@@ -39,32 +39,36 @@ Running this PowerShell script will create the data tables and stored procedures
 
 1. Log onto the machine that contains the SQL Server you wish to use.
 
-2. Download  <a href="https://raw.githubusercontent.com/Microsoft/r-server-campaign-optimization/master/Resources/ActionScripts/SetupVM.ps1" download>SetupVM.ps1</a> to your computer.
+2. Download  <a href="https://raw.githubusercontent.com/Microsoft/ml-server-image-similarity/master/Resources/ActionScripts/SetupVM.ps1" download>SetupVM.ps1</a> to your computer.
 
-1.  Right click on SetupVM.ps1 and select `Run with PowerShell`.
+3. Open a command or PowerShell window as Administrator.
 
-1.  Answer `Y` if asked if it is ok to execute this script.
+4. CD to the directory where you downloaded the above .ps1 file and execute the command:
 
-1. This will make the following modification to your SQL Server:`
+    .\SetupVM.ps1
+
+5. Answer the prompts.
+
+6.This will make the following modification to your SQL Server:
+
     * Creates the SLQRUserGroup for running R and Python code.
     * Reconfigures SQL Server to allow running of external scripts.
     * Installs the latest SQL Server 2017 Cumulative Update if no updates have been installed (this solution requires at least CU1 to run successfully).
+    * Enables firewall access for FILESTREAM
+    * Enables FILESTREAM at the SQL instance level as described [here](https://docs.microsoft.
+    * Copies the Resnet model needed for this solution into the correct directory.
     * Clones the solution code and data into the c:\Solutions\{{ site.folder_name }} directory.
     * Installs the image_similarity Python package.
     * Creates the solution database `{{ site.db_name }}` 
-    * Enables FILESTREAM at the SQL instance level as described [here](https://docs.microsoft.com/en-us/sql/relational-imagesbases/blob/enable-the-prerequisites-for-filetable).
+  com/en-us/sql/relational-imagesbases/blob/enable-the-prerequisites-for-filetable).
     * Copies images to the configured filestream directory.
-    * Copies the Resnet model needed for this solution into the correct directory.d
-
-    
+    * Runs the solution workflow to populate all database tables.
     
 ## Review Data
 --------------
 
 Once the PowerShell script has completed successfully, log into the SQL Server Management Studio to view all the datasets that have been created in the `{{ site.db_name }}_Py` databases.  
 Hit `Refresh` if necessary.
-<br/>
-
 
 [Click here](tables.html) to view the details all tables created in this solution.
 
@@ -73,6 +77,6 @@ Hit `Refresh` if necessary.
 
 You've now finsihed the process of featurizing images using pre-trained DNN model, preparing the training/testing/evaluation image set, training a multi-class classifier and saving the model into SQL table as [described here](data-scientist.html).
 
-This PowerShell script also created the stored procedures to perform these tasks as well as a procedure that can be used to  return top K similar candidates for new query images. 
+This PowerShell script also created the stored procedures to perform these tasks as well as a procedure that can be used to  return top K similar candidates for new query images.
 
 You can explore this solution in more detail by examining the folders and running Python or stored procedures to re-create the model, or skip to trying out the model in the included **Test Model.ipynb** [Jupyter notebook](jupyter.html).
