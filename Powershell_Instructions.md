@@ -51,18 +51,18 @@ Running this PowerShell script will create the data tables and stored procedures
 
 6.This will make the following modification to your SQL Server:
 
-    * Creates the SLQRUserGroup for running R and Python code.
-    * Reconfigures SQL Server to allow running of external scripts.
-    * Installs the latest SQL Server 2017 Cumulative Update if no updates have been installed (this solution requires at least CU1 to run successfully).
-    * Enables firewall access for FILESTREAM
-    * Enables FILESTREAM at the SQL instance level as described [here](https://docs.microsoft.
-    * Copies the Resnet model needed for this solution into the correct directory.
-    * Clones the solution code and data into the c:\Solutions\{{ site.folder_name }} directory.
-    * Installs the image_similarity Python package.
-    * Creates the solution database `{{ site.db_name }}` 
-  com/en-us/sql/relational-imagesbases/blob/enable-the-prerequisites-for-filetable).
-    * Copies images to the configured filestream directory.
-    * Runs the solution workflow to populate all database tables.
+* Creates the SLQRUserGroup for running R and Python code.
+* Reconfigures SQL Server to allow running of external scripts.
+* Installs the latest SQL Server 2017 Cumulative Update if no updates have been installed (this solution requires at least CU1 to run successfully).
+* Enables firewall access for FILESTREAM
+* Enables FILESTREAM at the SQL instance level as described [here](https://docs.microsoft.
+* Copies the Resnet model needed for this solution into the correct directory.
+* Clones the solution code and data into the c:\Solutions\{{ site.folder_name }} directory.
+* Installs the image_similarity Python package.
+* Creates the solution database `{{ site.db_name }}` 
+com/en-us/sql/relational-imagesbases/blob/enable-the-prerequisites-for-filetable).
+* Copies images to the configured filestream directory.
+* Runs the solution workflow to populate all database tables.
     
 ## Review Data
 --------------
