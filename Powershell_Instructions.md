@@ -49,7 +49,7 @@ Running this PowerShell script will create the data tables and stored procedures
 
 5. Answer the prompts.
 
-6.This will make the following modification to your SQL Server:
+This will make the following modification to your SQL Server:
 
 * Creates the SLQRUserGroup for running R and Python code.
 * Reconfigures SQL Server to allow running of external scripts.
