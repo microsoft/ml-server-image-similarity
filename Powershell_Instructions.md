@@ -55,7 +55,7 @@ This will make the following modification to your SQL Server:
 * Reconfigures SQL Server to allow running of external scripts.
 * Installs the latest SQL Server 2017 Cumulative Update if no updates have been installed (this solution requires at least CU1 to run successfully).
 * Enables firewall access for FILESTREAM
-* Enables FILESTREAM at the SQL instance level as described [here](https://docs.microsoft.
+* Enables FILESTREAM at the SQL instance level as described [here](https://docs.microsoft.com/en-us/sql/relational-imagesbases/blob/enable-the-prerequisites-for-filetable).
 * Copies the Resnet model needed for this solution into the correct directory.
 * Clones the solution code and data into the c:\Solutions\{{ site.folder_name }} directory.
 * Installs the image_similarity Python package.
