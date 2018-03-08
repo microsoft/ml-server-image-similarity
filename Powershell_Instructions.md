@@ -60,7 +60,6 @@ Running this PowerShell script will create the data tables and stored procedures
 * Clones the solution code and data into the c:\Solutions\{{ site.folder_name }} directory.
 * Installs the image_similarity Python package.
 * Creates the solution database `{{ site.db_name }}` 
-com/en-us/sql/relational-imagesbases/blob/enable-the-prerequisites-for-filetable).
 * Copies images to the configured filestream directory.
 * Runs the solution workflow to populate all database tables.
     
