@@ -4,13 +4,15 @@ title: Setup for Local Code Execution
 ---
 ## Setup for Local Code Execution
 
-You can execute code on your local computer and push the computations to the SQL Server on the VM  that was created by the Azure AI Gallery. But first you must perform the following steps. 
+You can execute code on your local computer and push the computations to the SQL Server.
 
-## On the VM: Configure VM for Remote Access
+_Follow the steps in this section only if your local computer is different than the SQL Server machine._ 
 
-Connect to the VM to perform the following steps.
+## On the SQL Server Computer: Configure for Remote Access
 
-You must open the Windows firewall on the VM to allow a connection to the SQL Server. To open the firewall, execute the following command in a PowerShell window on the VM:
+Connect to the SQL Server computer to perform the following steps.
+
+There must be an open Windows firewall to allow a connection to the SQL Server. To open the firewall, execute the following command in a PowerShell window on the SQL Server computer (or VM you deployed from Azure AI Gallery):
 
 <code class="highlighter-rouge">
 netsh advfirewall firewall add rule name="SQLServer" dir=in action=allow protocol=tcp localport=1433 
@@ -19,28 +21,18 @@ netsh advfirewall firewall add rule name="SQLServer" dir=in action=allow protoco
 ## On Your Local Computer 
 Now switch to your local computer and perform the following steps to get the code and setup your local environment.
 
-### Obtain code
+* [Install Machine Learning Server](https://docs.microsoft.com/en-us/machine-learning-server/install/machine-learning-server-windows-install). Make sure to include installation of Python and the Pre-trained Models.
 
-To copy the solution code to your computer: 
-1.  Open a PowerShell window.
-2.  Navigate to the directory of your choice, and execute the following command:  
+*  Clone the solution code to your computer:
 
-    ```
-    git clone {{ site.code_url }} {{ site.folder_name }}
-    ```
+        git clone https://github.com/Microsoft/ml-server-image-similarity.git 
 
-This will create a folder **{{ site.folder_name }}** containing the full solution package.
 
-###  R
+* Install the image similarity package:
 
-Perform these steps on your local computer.
+    cd ml-server-image-similarity
+    "C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\python.exe" setup.py install
 
-If you use your local computer you will need to have a copy of R Client on your local machine, <a href="rstudio.html"> installed and configured</a> for your IDE.  
+* In the Python\run_image_similarity.py file, change the connection string at the bottom to specify your server.  If you have a userid and password, replace `TRUSTED_CONNECTION=True` with `uid=YOURUSERID;pwd=YOURPASSWORD`.
 
-###  Python
-
-Perform these steps on your local computer.
-
-See <a href="https://docs.microsoft.com/en-us/machine-learning-server/install/python-libraries-interpreter">How to install custom Python packages and interpreter locally on Windows</a>.
-
-<a href="CIG_Workflow.html#step2">Return to Typical Workflow for Azure AI Gallery Deployment<a>
+[&lt; Back to PowerShell Instructions](powershell_instructions.html)

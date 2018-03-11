@@ -62,7 +62,11 @@ This will make the following modification to your SQL Server:
 * Creates the solution database `{{ site.db_name }}` 
 * Copies images to the configured filestream directory.
 * Runs the solution workflow to populate all database tables.
-    
+
+<div class="alert alert info">    
+If you wish to run the solution code on a different computer than SQL Server machine, see <a href="local.html">Setup for Local Code Execution</a>.
+</div>
+
 ## Review Data
 --------------
 
