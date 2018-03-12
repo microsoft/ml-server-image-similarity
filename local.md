@@ -23,12 +23,15 @@ Now switch to your local computer and perform the following steps to get the cod
 
 * Clone the solution code to your computer:
 
-        git clone {{site.code_url}}.git
+        git clone {{site.code_url}}.git {{ site.folder_name }}
+
+This will create a folder **{{ site.folder_name }}** containing the full solution package.
 
 * Install the image similarity package:
 
-    cd ml-server-image-similarity
-    "C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\python.exe" setup.py install
+        cd ml-server-image-similarity
+        "C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\python.exe" setup.py install
+
 
 * In the **Python\run_image_similarity.py** file, change the connection string at the bottom to specify your server.  If you have a userid and password, replace `TRUSTED_CONNECTION=True` with `uid=YOURUSERID;pwd=YOURPASSWORD`.
 
