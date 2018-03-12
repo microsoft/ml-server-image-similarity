@@ -16,6 +16,4 @@ title: Quick Start
 
         * Once the server is configured, use the [PowerShell Instructions](Powershell_Instructions.html) for a quick deployment of the solution.
 
-    
-    
-    * You can then follow the steps in [For the Data Scientist](data-scientist.html) or [For the Database Analyst](dba.html).
+* You can then follow the steps in [For the Data Scientist](data-scientist.html) or [For the Database Analyst](dba.html).
