@@ -6,7 +6,7 @@ title: Quick Start
 ## Quick Start
 -----------------
  
- There are multiple ways you can try this solution package out for yourself.
+There are multiple ways you can try this solution package out for yourself.
 
 * Visit the [Azure AI Gallery]({{ site.aka_url }}) and use the `Deploy` button.  All necessary software will be installed and configured for you as well as the initial deployment of the solution.  You will be all set to explore the code and [try out the model](jupyter.html) on the deployed virtual machine.
 
