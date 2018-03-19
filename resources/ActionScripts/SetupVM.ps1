@@ -225,6 +225,8 @@ END "
 $RequireCuUpdate = Invoke-Sqlcmd -Query $Query
 $RequireCuUpdate = $RequireCuUpdate.Item(0)
 
+$RequireCuUpdate = 1 #Testing to see if CU update is still needed 
+
 IF ($RequireCuUpdate -eq 0) 
 {
 WRITE-Host "CU Needs Updating will be done at end of Script"
