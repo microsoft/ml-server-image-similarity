@@ -45,7 +45,7 @@ Running this PowerShell script will create the data tables and stored procedures
 
 4. CD to the directory where you downloaded the above .ps1 file and execute the command:
 
-    .\SetupVM.ps1
+    .\ImageSimilaritySetup.ps1
 
 5. Answer the prompts.
 
