@@ -239,7 +239,11 @@ Invoke-Sqlcmd -ServerInstance $ServerName -Database $dbName -Query $query
 Write-Host "Copy Image Files into FileStream Table"
     Set-Location "C:\Solutions\ImageSimilarity\Data"
     Invoke-Expression ".\import_data.bat"
-    $src = "C:\Solutions\ImageSimilarity\data\FashionTexture\*"         
+    $src = "C:\Solutions\ImageSimilarity\Data\dotted\*"         
+    $dst = "\\$ServerName\MSSQLSERVER\FileTableData\ImageStore\"
+    $src = "C:\Solutions\ImageSimilarity\Data\leopard\*"         
+    $dst = "\\$ServerName\MSSQLSERVER\FileTableData\ImageStore\"
+    $src = "C:\Solutions\ImageSimilarity\Data\striped\*"         
     $dst = "\\$ServerName\MSSQLSERVER\FileTableData\ImageStore\"
     copy-item -Force -Recurse -Verbose -PassThru $src $dst -ErrorAction SilentlyContinue
     copy-item -Force -Recurse $src $dst -ErrorAction SilentlyContinue
