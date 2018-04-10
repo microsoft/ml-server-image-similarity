@@ -212,11 +212,13 @@ Write-Host "Done installing image_similarity package"
 
 
 ###Install SQL CU 
-{Write-Host " Checking SQL CU Version If Behind install Latest CU...."}
+
+Write-Host 
+("Checking SQL CU Version If Behind install Latest CU")
 
 $Query = "SELECT CASE 
 WHEN  
-    (RIGHT(CAST(SERVERPROPERTY('ProductUpdateLevel') as varchar),1) > 1)
+    (RIGHT(CAST(SERVERPROPERTY('ProductUpdateLevel') as varchar),1) >= 1)
     AND 
     (SELECT Left(CAST(SERVERPROPERTY('productversion') as varchar),2))>= 14
 THEN 1 
@@ -225,15 +227,40 @@ END "
 $RequireCuUpdate = Invoke-Sqlcmd -Query $Query
 $RequireCuUpdate = $RequireCuUpdate.Item(0)
 
+$RequireCuUpdate = "1"
 
 IF ($RequireCuUpdate -eq 0) 
-{
-WRITE-Host "CU Needs Updating will be done at end of Script"
+    {
+    WRITE-Host 
+    ("Downloading Latest CU")
+
+##cu1 
+##    Start-BitsTransfer -Source "http://download.windowsupdate.com/d/msdownload/update/software/updt/2017/12/sqlserver2017-kb4038634-x64_a75ab79103d72ce094866404607c2e84ae777d43.exe" -Destination c:\tmp\sqlserver2017CU1.exe
+
+##cu3  
+ ## Start-BitsTransfer -Source "http://download.windowsupdate.com/d/msdownload/update/software/updt/2018/01/sqlserver2017-kb4052987-x64_a533b82e49cb9a5eea52cd2339db18aa4017587b.exe" -Destination c:\tmp\sqlserver2017CU3.exe 
+
+##CU4 
+    Start-BitsTransfer -Source "http://download.windowsupdate.com/c/msdownload/update/software/updt/2018/03/sqlserver2017-kb4056498-x64_d1f84e3cfbda5006301c8e569a66a982777a8a75.exe" -Destination c:\tmp\sqlserver2017CU4.exe   
+    $CU = "sqlserver2017CU4.exe"
+    Write-Host 
+    ("CU has been Downloaded now to install , go have a cocktail as this takes a while")
+  
+    Invoke-Expression "c:\tmp\$CU  /q /IAcceptSQLServerLicenseTerms /IACCEPTPYTHONLICENSETERMS /IACCEPTROPENLICENSETERMS /Action=Patch /InstanceName=MSSQLSERVER /FEATURES=SQLEngine,ADVANCEDANALYTICS,SQL_INST_MR,SQL_INST_MPY"    
+ 
+   Write-Host 
+    ("CU Install has commenced")
+    Write-Host 
+    ("Powershell time to take a nap")
+    Start-Sleep -s 1000
+    Write-Host 
+    ("Powershell nap time is over")
 }
-ELSE 
-{Write-Host "CU is Current" }
 
-
+    ###Unbind Python 
+    Set-Location $scriptPath
+    invoke-expression ".\UpdateMLServer.bat"
+    Write-Host "ML Server has been updated"
 
 ####Run Configure SQL to Create Databases and Populate with needed Data
 $ConfigureSql = "C:\Solutions\$SolutionName\Resources\ActionScripts\ConfigureSQL.ps1  $ServerName $SolutionName $InstallPy $InstallR $EnableFileStream $Prompt"
@@ -282,28 +309,6 @@ if($SampleWeb  -eq "Yes")
     (Get-Content $SolutionPath\Website\server.js).replace('XXYOURSQLUSER', $username) | Set-Content $SolutionPath\Website\server.js
     }
 
-
-
-IF ($RequireCuUpdate -eq 0) 
-  {
-    WRITE-Host 
-    ("Downloading Latest CU")
-
-    Start-BitsTransfer -Source "http://download.windowsupdate.com/c/msdownload/update/software/updt/2018/03/sqlserver2017-kb4056498-x64_d1f84e3cfbda5006301c8e569a66a982777a8a75.exe" -Destination c:\tmp\sqlserver2017-kb4056498-x64_d1f84e3cfbda5006301c8e569a66a982777a8a75.exe  
-
-    Write-Host 
-    ("CU has been Downloaded now to install , go have a cocktail as this takes a while")
-
-
-    Invoke-Expression "c:\tmp\sqlserver2017-kb4056498-x64_d1f84e3cfbda5006301c8e569a66a982777a8a75.exe /q /IAcceptSQLServerLicenseTerms /IACCEPTPYTHONLICENSETERMS /IACCEPTROPENLICENSETERMS /Action=Patch /InstanceName=MSSQLSERVER"
-    Write-Host 
-    ("CU Install has commenced")
-    Write-Host 
-    ("Powershell time to take a nap")
-    Start-Sleep -s 1000
-    Write-Host 
-    ("Powershell nap time is over")
-    }
 
 ##Launch HelpURL 
 Start-Process "https://microsoft.github.io/$SolutionFullName/"
