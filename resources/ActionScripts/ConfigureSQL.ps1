@@ -241,8 +241,12 @@ Write-Host "Copy Image Files into FileStream Table"
     Invoke-Expression ".\import_data.bat"
     $src = "C:\Solutions\ImageSimilarity\Data\dotted\*"         
     $dst = "\\$ServerName\MSSQLSERVER\FileTableData\ImageStore\"
+    copy-item -Force -Recurse -Verbose -PassThru $src $dst -ErrorAction SilentlyContinue
+    copy-item -Force -Recurse $src $dst -ErrorAction SilentlyContinue
     $src = "C:\Solutions\ImageSimilarity\Data\leopard\*"         
     $dst = "\\$ServerName\MSSQLSERVER\FileTableData\ImageStore\"
+    copy-item -Force -Recurse -Verbose -PassThru $src $dst -ErrorAction SilentlyContinue
+    copy-item -Force -Recurse $src $dst -ErrorAction SilentlyContinue
     $src = "C:\Solutions\ImageSimilarity\Data\striped\*"         
     $dst = "\\$ServerName\MSSQLSERVER\FileTableData\ImageStore\"
     copy-item -Force -Recurse -Verbose -PassThru $src $dst -ErrorAction SilentlyContinue
