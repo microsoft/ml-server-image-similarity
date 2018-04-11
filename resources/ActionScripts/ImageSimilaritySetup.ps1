@@ -257,10 +257,10 @@ IF ($RequireCuUpdate -eq 0)
     ("Powershell nap time is over")
 }
 
-    ###Unbind Python 
-    Set-Location $scriptPath
-    invoke-expression ".\UpdateMLServer.bat"
-    Write-Host "ML Server has been updated"
+    # ###Unbind Python 
+    # Set-Location $scriptPath
+    # invoke-expression ".\UpdateMLServer.bat"
+    # Write-Host "ML Server has been updated"
 
 ####Run Configure SQL to Create Databases and Populate with needed Data
 $ConfigureSql = "C:\Solutions\$SolutionName\Resources\ActionScripts\ConfigureSQL.ps1  $ServerName $SolutionName $InstallPy $InstallR $EnableFileStream $Prompt"
