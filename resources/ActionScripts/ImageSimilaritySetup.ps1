@@ -29,27 +29,19 @@ $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIde
 if ($isAdmin -eq 'True') {
 
 
-
-
 $setupLog = "c:\tmp\setup_log.txt"
 Start-Transcript -Path $setupLog -Append
 $startTime = Get-Date
 Write-Host  "Start time:" $startTime
 
 
-
-
-
 #$Prompt= if ($Prompt -match '^y(es)?$') {'Y'} else {'N'}
 $Prompt = 'N'
-
 
 ##Change Values here for Different Solutions 
 $SolutionName = "ImageSimilarity"
 $SolutionFullName = "ml-server-image-similarity" 
-$JupyterNotebook = "TestModel.ipynb"
 $Shortcut = "SolutionHelp.url"
-
 
 ### DON'T FORGET TO CHANGE TO MASTER LATER...
 $Branch = "master" 
@@ -60,8 +52,6 @@ $EnableFileStream = 'Yes' ## If Solution Requires FileStream DB this should be '
 $UsePowerBI = 'No' ## If Solution uses PowerBI
 $Prompt = 'N'
 $MixedAuth = 'No'
-
-
 
 
 ###These probably don't need to change , but make sure files are placed in the correct directory structure 
@@ -122,14 +112,10 @@ if ($EnableFileStream -eq 'Yes')
 
  
 
-
-
-
 ############################################################################################
 #Configure SQL to Run our Solutions 
 ############################################################################################
 
-#Write-Host -ForegroundColor 'Cyan' " Switching SQL Server to Mixed Mode"
 
 
 $Query = "SELECT SERVERPROPERTY('ServerName')"
@@ -177,9 +163,7 @@ ELSE
     ### Stop the SQL Service and Launchpad wild cards are used to account for named instances  
     Restart-Service -Name "MSSQ*" -Force
 }
-### Start the SQL Service 
-#Start-Service -Name "MSSQ*"
-#Write-Host -ForegroundColor 'Cyan' " SQL Services Restarted"
+
 
 if($MixedAuth -eq 'Yes')
 {
@@ -213,51 +197,8 @@ Write-Host "Done installing image_similarity package"
 
 ###Install SQL CU 
 
-Write-Host 
-("Checking SQL CU Version If Behind install Latest CU")
 
-$Query = "SELECT CASE 
-WHEN  
-    (RIGHT(CAST(SERVERPROPERTY('ProductUpdateLevel') as varchar),1) >= 1)
-    AND 
-    (SELECT Left(CAST(SERVERPROPERTY('productversion') as varchar),2))>= 14
-THEN 1 
-ELSE 0 
-END "
-$RequireCuUpdate = Invoke-Sqlcmd -Query $Query
-$RequireCuUpdate = $RequireCuUpdate.Item(0)
-
-$RequireCuUpdate = "1"
-
-IF ($RequireCuUpdate -eq 0) 
-    {
-    WRITE-Host 
-    ("Downloading Latest CU")
-
-##cu1 
-##    Start-BitsTransfer -Source "http://download.windowsupdate.com/d/msdownload/update/software/updt/2017/12/sqlserver2017-kb4038634-x64_a75ab79103d72ce094866404607c2e84ae777d43.exe" -Destination c:\tmp\sqlserver2017CU1.exe
-
-##cu3  
- ## Start-BitsTransfer -Source "http://download.windowsupdate.com/d/msdownload/update/software/updt/2018/01/sqlserver2017-kb4052987-x64_a533b82e49cb9a5eea52cd2339db18aa4017587b.exe" -Destination c:\tmp\sqlserver2017CU3.exe 
-
-##CU4 
-    Start-BitsTransfer -Source "http://download.windowsupdate.com/c/msdownload/update/software/updt/2018/03/sqlserver2017-kb4056498-x64_d1f84e3cfbda5006301c8e569a66a982777a8a75.exe" -Destination c:\tmp\sqlserver2017-kb4056498-x64_d1f84e3cfbda5006301c8e569a66a982777a8a75.exe   
-
-    Write-Host 
-    ("CU has been Downloaded now to install , go have a cocktail as this takes a while")
-  
-    Invoke-Expression "c:\tmp\sqlserver2017-kb4056498-x64_d1f84e3cfbda5006301c8e569a66a982777a8a75.exe  /q /IAcceptSQLServerLicenseTerms /IACCEPTPYTHONLICENSETERMS /IACCEPTROPENLICENSETERMS /Action=Patch /InstanceName=MSSQLSERVER"    
- 
-   Write-Host 
-    ("CU Install has commenced")
-    Write-Host 
-    ("Powershell time to take a nap")
-    Start-Sleep -s 1000
-    Write-Host 
-    ("Powershell nap time is over")
-}
-
-    ###Unbind Python 
+###Unbind Python 
     Set-Location $scriptPath
     invoke-expression ".\UpdateMLServer.bat"
     Write-Host "ML Server has been updated"
