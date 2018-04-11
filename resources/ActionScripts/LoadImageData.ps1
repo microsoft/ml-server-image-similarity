@@ -51,7 +51,7 @@ $Pyend = Get-Date
 
 $Duration = New-TimeSpan -Start $PyStart -End $Pyend 
 Write-Host ("Py Server Configured in $Duration")
-
+Remove-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\LoadImageData.ps1"
 }
 ELSE
 {"Why Not?"}
