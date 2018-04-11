@@ -217,3 +217,92 @@ Configuring $SolutionName Solution for Py
 "
 $dbname = $db + "_Py"
 
+##########################################################################
+# Deployment Pipeline Py
+##########################################################################
+
+
+Write-Host ("Import CSV File(s). This Should take about 30 Seconds Per File")
+
+$Query =    "INSERT INTO [ImageSimilarity_Py].[dbo].[query_images] VALUES (0,'C:\Solutions\ImageSimilarity\data\dotted\81.jpg')"
+            # INSERT INTO [ImageSimilarity_Py].[dbo].[query_images] VALUES (0,'C:\Solutions\ImageSimilarity\data\fashionTexture\floral\2562.jpg')
+            # INSERT INTO [ImageSimilarity_Py].[dbo].[query_images] VALUES (0,'C:\Solutions\ImageSimilarity\data\fashionTexture\leopard\3093.jpg')"
+
+Invoke-Sqlcmd -ServerInstance $ServerName -Database $dbName -Query $query 
+
+
+
+
+
+
+Write-Host "Copy Image Files into FileStream Table"
+    Set-Location "C:\Solutions\ImageSimilarity\Data"
+    Invoke-Expression ".\import_data.bat"
+    $src = "C:\Solutions\ImageSimilarity\Data\dotted"         
+    $dst = "\\$ServerName\MSSQLSERVER\FileTableData\ImageStore\"
+    copy-item -Force -Recurse -Verbose -PassThru $src $dst -ErrorAction SilentlyContinue
+    copy-item -Force -Recurse $src $dst -ErrorAction SilentlyContinue
+    $src = "C:\Solutions\ImageSimilarity\Data\leopard"         
+    $dst = "\\$ServerName\MSSQLSERVER\FileTableData\ImageStore\"
+    copy-item -Force -Recurse -Verbose -PassThru $src $dst -ErrorAction SilentlyContinue
+    copy-item -Force -Recurse $src $dst -ErrorAction SilentlyContinue
+    $src = "C:\Solutions\ImageSimilarity\Data\striped"         
+    $dst = "\\$ServerName\MSSQLSERVER\FileTableData\ImageStore\"
+    copy-item -Force -Recurse -Verbose -PassThru $src $dst -ErrorAction SilentlyContinue
+    copy-item -Force -Recurse $src $dst -ErrorAction SilentlyContinue
+
+    Write-Host " Image Files Copied to FileStream Table" 
+
+
+# try
+# {
+
+# Write-Host ("Import CSV File(s). This Should take about 30 Seconds Per File")
+
+
+
+# # upload csv files into SQL tables
+# foreach ($dataFile in $dataList)
+# {
+# $destination = $SolutionData + $dataFile + ".csv" 
+# $tableName = $DBName + ".dbo." + $dataFile
+# $tableSchema = $dataPath + "\" + $dataFile + ".xml"
+# $dataSet = Import-Csv $destination
+# Write-Host ("         Loading $dataFile.csv into SQL Table") 
+# Write-SqlTableData -InputData $dataSet  -DatabaseName $dbName -Force -Passthru -SchemaName dbo -ServerInstance $ServerName -TableName $dataFile
+
+
+# Write-Host (" $datafile table loaded from CSV File(s).")
+# }
+# }
+# catch
+# {
+# Write-Host -ForegroundColor DarkYellow "Exception in populating database tables:"
+# Write-Host -ForegroundColor Red $Error[0].Exception 
+# throw
+# }
+# Write-Host (" Finished loading .csv File(s).")
+
+Write-Host (" Training Model and Scoring Data...")
+
+##$query = "EXEC Inital_Run_Once_Py"
+##SqlServer\Invoke-Sqlcmd -ServerInstance LocalHost -Database $dbName -Query $query -ConnectionTimeout  0 -QueryTimeout 0
+Set-Location "C:\Solutions\ImageSimilarity\Python"
+Invoke-Expression ".\run_image_similarity.bat"
+
+# {
+#     Write-Host " Seting up python plus Importing revoscalepy and microsoftml...." 
+#     Invoke-Expression "C:\Solutions\ImageSimilarity\Python\run_image_similarity.bat C:\Solutions\$SolutionName\Python"   
+#     Set-Location "C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\"
+#     python.exe -c "run_image_similarity.py"
+    
+#     }
+
+
+
+$Pyend = Get-Date
+
+$Duration = New-TimeSpan -Start $PyStart -End $Pyend 
+Write-Host ("Py Server Configured in $Duration")
+
+}

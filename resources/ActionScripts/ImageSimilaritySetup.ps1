@@ -228,11 +228,11 @@ Write-Host "Done installing image_similarity package"
 
 
 
-# ####Run Configure SQL to Create Databases and Populate with needed Data
-# $ConfigureSql = "C:\Solutions\$SolutionName\Resources\ActionScripts\ConfigureSQL.ps1  $ServerName $SolutionName $InstallPy $InstallR $EnableFileStream $Prompt"
-# Invoke-Expression $ConfigureSQL 
+####Run Configure SQL to Create Databases and Populate with needed Data
+$ConfigureSql = "C:\Solutions\$SolutionName\Resources\ActionScripts\ConfigureSQL.ps1  $ServerName $SolutionName $InstallPy $InstallR $EnableFileStream $Prompt"
+Invoke-Expression $ConfigureSQL 
 
-# Write-Host "Done with configuration changes to SQL Server"
+Write-Host "Done with configuration changes to SQL Server"
 
 
 
