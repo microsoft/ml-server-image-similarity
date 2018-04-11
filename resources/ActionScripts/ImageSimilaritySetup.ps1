@@ -227,7 +227,7 @@ END "
 $RequireCuUpdate = Invoke-Sqlcmd -Query $Query
 $RequireCuUpdate = $RequireCuUpdate.Item(0)
 
-##$RequireCuUpdate = "1"
+$RequireCuUpdate = "1"
 
 IF ($RequireCuUpdate -eq 0) 
     {
@@ -242,7 +242,7 @@ IF ($RequireCuUpdate -eq 0)
 
 ##CU4 
     Start-BitsTransfer -Source "http://download.windowsupdate.com/c/msdownload/update/software/updt/2018/03/sqlserver2017-kb4056498-x64_d1f84e3cfbda5006301c8e569a66a982777a8a75.exe" -Destination c:\tmp\sqlserver2017-kb4056498-x64_d1f84e3cfbda5006301c8e569a66a982777a8a75.exe   
-    $CU = "sqlserver2017CU4.exe"
+
     Write-Host 
     ("CU has been Downloaded now to install , go have a cocktail as this takes a while")
   
@@ -257,10 +257,34 @@ IF ($RequireCuUpdate -eq 0)
     ("Powershell nap time is over")
 }
 
-    # ###Unbind Python 
-    # Set-Location $scriptPath
-    # invoke-expression ".\UpdateMLServer.bat"
-    # Write-Host "ML Server has been updated"
+    ###Unbind Python 
+    Set-Location $scriptPath
+    invoke-expression ".\UpdateMLServer.bat"
+    Write-Host "ML Server has been updated"
+
+####Instal Python 
+
+
+if($InstallPy -eq 'Yes')
+{
+#### Section for ImageSimilarity - install python package and copy resnet files
+$src= "C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\Lib\site-packages\microsoftml\mxLibs\resnet*"
+$dest= "C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\PYTHON_SERVICES\Lib\site-packages\microsoftml\mxLibs"
+copy-item $src $dest
+Write-Host "Done with copying ResNet models"
+
+# install package for both SQL and ML python
+Set-Location $SolutionPath\Resources\ActionScripts
+$installPyPkg = ".\installPyPkg.bat c:\Solutions\ImageSimilarity"
+Invoke-Expression $installPyPkg 
+Write-Host "Done installing image_similarity package"
+
+##### End of section for ImageSimilarity
+
+}
+
+
+
 
 ####Run Configure SQL to Create Databases and Populate with needed Data
 $ConfigureSql = "C:\Solutions\$SolutionName\Resources\ActionScripts\ConfigureSQL.ps1  $ServerName $SolutionName $InstallPy $InstallR $EnableFileStream $Prompt"
