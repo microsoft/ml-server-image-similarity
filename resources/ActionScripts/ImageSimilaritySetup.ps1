@@ -192,12 +192,7 @@ Invoke-Expression $installPyPkg
 Write-Host "Done installing image_similarity package"
 
 ##### End of section for ImageSimilarity
-
 }
-
-
-###Install SQL CU 
-
 
 ###Unbind Python 
     Set-Location $scriptPath
@@ -205,7 +200,6 @@ Write-Host "Done installing image_similarity package"
     Write-Host "ML Server has been updated"
 
 ####Instal Python 
-
 
 if($InstallPy -eq 'Yes')
 {
@@ -225,17 +219,11 @@ Write-Host "Done installing image_similarity package"
 
 }
 
-
-
-
 ####Run Configure SQL to Create Databases and Populate with needed Data
 $ConfigureSql = "C:\Solutions\$SolutionName\Resources\ActionScripts\ConfigureSQL.ps1  $ServerName $SolutionName $InstallPy $InstallR $EnableFileStream $Prompt"
 Invoke-Expression $ConfigureSQL 
 
 Write-Host "Done with configuration changes to SQL Server"
-
-
-
 
 If ($UsePowerBI -eq 'Yes') 
 {

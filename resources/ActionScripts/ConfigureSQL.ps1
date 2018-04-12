@@ -96,10 +96,7 @@ if ($isCompatible -eq 'Yes' -and $InstallPy -eq 'Yes') {
     Write-Host("SQLServerObjects Created in $dbName Database")
 $OdbcName = "obdc" + $dbname
  ## Create ODBC Connection for PowerBI to Use 
-## Add-OdbcDsn -Name $OdbcName -DriverName "ODBC Driver 13 for SQL Server" -DsnType 'System' -Platform '64-bit' -SetPropertyValue @("Server=$ServerName", "Trusted_Connection=Yes", "Database=$dbName") -ErrorAction SilentlyContinue -PassThru
-
-
-
+Add-OdbcDsn -Name $OdbcName -DriverName "ODBC Driver 13 for SQL Server" -DsnType 'System' -Platform '64-bit' -SetPropertyValue @("Server=$ServerName", "Trusted_Connection=Yes", "Database=$dbName") -ErrorAction SilentlyContinue -PassThru
 
 }
 else 
@@ -108,103 +105,7 @@ else
     else
     {Write-Host "There is not a py version of this solution"}
 }
-
  
-
-
-If ($InstallR -eq 'Yes')
-{
-Write-Host "Creating SQL Database for R "
-
-
-Write-Host("Using $ServerName SQL Instance") 
-
-$dbName = $db + "_R"
-
-
-## Create RServer DB 
-$SqlParameters = @("dbName=$dbName")
-
-$CreateSQLDB = "$ScriptPath\CreateDatabase.sql"
-
-$CreateSQLObjects = "$ScriptPath\CreateSQLObjectsR.sql"
-Write-Host ("Calling Script to create the  $dbName database") 
-invoke-sqlcmd -inputfile $CreateSQLDB -serverinstance $ServerName -database master -Variable $SqlParameters
-
-
-Write-Host ("SQLServerDB $dbName Created")
-invoke-sqlcmd "USE $dbName;" 
-
-Write-Host ("Calling Script to create the objects in the $dbName database")
-invoke-sqlcmd -inputfile $CreateSQLObjects -serverinstance $ServerName -database $dbName
-
-
-Write-Host ("SQLServerObjects Created in $dbName Database")
-
-
-###Configure Database for R 
-Write-Host "  
-Configuring $SolutionName Solution for R
-"
-
-$dbName = $db + "_R" 
-
-## Create ODBC Connection for PowerBI to Use 
-## $OdbcName = "obdc" + $dbname
-## Create ODBC Connection for PowerBI to Use 
-## Add-OdbcDsn -Name $OdbcName -DriverName "ODBC Driver 13 for SQL Server" -DsnType 'System' -Platform '64-bit' -SetPropertyValue @("Server=$ServerName", "Trusted_Connection=Yes", "Database=$dbName") -ErrorAction SilentlyContinue -PassThru
-
-
-##########################################################################
-# Deployment Pipeline
-##########################################################################
-
-$RStart = Get-Date
-try
-{
-
-Write-Host ("Import CSV File(s). This Should take about 30 Seconds Per File")
- ##Move this to top 
-
-
-# upload csv files into SQL tables
-foreach ($dataFile in $dataList)
-{
-$destination = $SolutionData + $dataFile + ".csv" 
-$tableName = $DBName + ".dbo." + $dataFile
-$tableSchema = $dataPath + "\" + $dataFile + ".xml"
-$dataSet = Import-Csv $destination
-Write-Host ("         Loading $dataFile.csv into SQL Table") 
-Write-SqlTableData -InputData $dataSet  -DatabaseName $dbName -Force -Passthru -SchemaName dbo -ServerInstance $ServerName -TableName $dataFile
-
-
-Write-Host (" $datafile table loaded from CSV File(s).")
-}
-}
-catch
-{
-Write-Host -ForegroundColor DarkYellow "Exception in populating database tables:"
-Write-Host -ForegroundColor Red $Error[0].Exception 
-throw
-}
-Write-Host ("Finished loading .csv File(s).")
-
-Write-Host ("Training Model and Scoring Data...")
-
-
-
-$query = "EXEC Initial_Run_Once_R"
-#SqlServer\Invoke-Sqlcmd -ServerInstance $ServerName -Database $dbName -Query $query -ConnectionTimeout  0 -QueryTimeout 0
-SqlServer\Invoke-Sqlcmd -ServerInstance LocalHost -Database $dbName -Query $query -ConnectionTimeout  0 -QueryTimeout 0
-
-$Rend = Get-Date
-
-$Duration = New-TimeSpan -Start $RStart -End $Rend 
-Write-Host ("R Server Configured in $Duration")
-}
-ELSE 
-{Write-Host "There is not a R Version for this Solution so R will not be Installed"}
-
 
 ###Conifgure Database for Py 
 if ($isCompatible -eq 'Yes'-and $InstallPy -eq 'Yes')
