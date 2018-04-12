@@ -57,7 +57,7 @@ Write-Host ("Data Loaded and Trained in $Duration")
 Remove-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\RunOnce.cmd"
 
 ##Copy Url to Start Menu
-Copy-Item "C:\Solutions\Resources\ActionScripts\SolutionHelp.url" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
+Copy-Item "C:\Solutions\ImageSimilarity\Resources\ActionScripts\SolutionHelp.url" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
 
 ##Launch HelpURL 
 Start-Process https://microsoft.github.io/ml-server-image-similarity/
