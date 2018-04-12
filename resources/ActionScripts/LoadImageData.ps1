@@ -1,4 +1,10 @@
-$Install = Read-Host -Prompt 'Would you like to play a game?'
+Write-Host " 
+Starting the Image Similarity Data Flow."
+Write-Host " 
+This script will download all images listed in ""c:\Solutions\ImageSimilarity\fashion_texture_urls.tsv"" 
+onto your machine, upload them to SQL and execute the end-to-end workflow to train an image similarity model. 
+"
+Read-Host -Prompt "Please respond YES to continue"
 
 If($Install -eq "Yes" -or $Install -eq "Y")
 {
@@ -48,5 +54,3 @@ $Duration = New-TimeSpan -Start $StartTime -End $Pyend
 Write-Host ("Data Loaded and Trained in $Duration")
 Remove-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\RunOnce.cmd"
 }
-ELSE
-{"Why Not?"}
