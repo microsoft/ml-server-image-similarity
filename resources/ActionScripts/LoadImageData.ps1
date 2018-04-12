@@ -26,13 +26,13 @@ Invoke-Sqlcmd -ServerInstance $ServerName -Database $dbName -Query $query
 Write-Host "Copy Image Files into FileStream Table"
     Set-Location "C:\Solutions\ImageSimilarity\Data"
     Invoke-Expression ".\import_data.bat"
-    $src = "$Src\dotted"         
+    $src = ".\dotted"         
     copy-item -Force -Recurse -Verbose -PassThru $src $dst -ErrorAction SilentlyContinue
     copy-item -Force -Recurse $src $dst -ErrorAction SilentlyContinue
-    $src = "$Src\leopard"         
+    $src = ".\leopard"         
     copy-item -Force -Recurse -Verbose -PassThru $src $dst -ErrorAction SilentlyContinue
     copy-item -Force -Recurse $src $dst -ErrorAction SilentlyContinue
-    $src = "$Src\striped"         
+    $src = ".\striped"         
     copy-item -Force -Recurse -Verbose -PassThru $src $dst -ErrorAction SilentlyContinue
     copy-item -Force -Recurse $src $dst -ErrorAction SilentlyContinue
 
@@ -42,10 +42,6 @@ Write-Host (" Training Model and Scoring Data...")
 
 Set-Location "C:\Solutions\ImageSimilarity\Python"
 Invoke-Expression ".\run_image_similarity.bat"
-
-
-
-
 
 $Pyend = Get-Date
 
