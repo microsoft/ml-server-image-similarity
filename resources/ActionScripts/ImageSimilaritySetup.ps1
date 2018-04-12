@@ -42,7 +42,7 @@ $Prompt = 'N'
 $SolutionName = "ImageSimilarity"
 $SolutionFullName = "ml-server-image-similarity" 
 $Shortcut = "SolutionHelp.url"
-$CnfgSol = "LoadImageData.ps1"
+
 
 ### DON'T FORGET TO CHANGE TO MASTER LATER...
 $Branch = "master" 
@@ -256,7 +256,7 @@ If ($UsePowerBI -eq 'Yes')
 
 ##Create Shortcuts and Autostart Help File 
 Copy-Item "$ScriptPath\$Shortcut" C:\Users\Public\Desktop\
-Copy-Item "$ScriptPath\$CnfgSol" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
+Copy-Item "$ScriptPath\RunOnce.cmd" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
 Copy-Item "$ScriptPath\$Shortcut" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
 Write-Host ("Help Files Copied to Desktop")
 

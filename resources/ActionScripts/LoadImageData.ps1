@@ -44,9 +44,9 @@ Invoke-Expression ".\run_image_similarity.bat"
 
 $Pyend = Get-Date
 
-$Duration = New-TimeSpan -Start $PyStart -End $Pyend 
-Write-Host ("Py Server Configured in $Duration")
-Remove-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\LoadImageData.ps1"
+$Duration = New-TimeSpan -Start $StartTime -End $Pyend 
+Write-Host ("Data Loaded and Trained in $Duration")
+Remove-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\RunOnce.cmd"
 }
 ELSE
 {"Why Not?"}
