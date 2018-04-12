@@ -4,7 +4,7 @@ Write-Host "
 This script will download all images listed in ""c:\Solutions\ImageSimilarity\fashion_texture_urls.tsv"" 
 onto your machine, upload them to SQL and execute the end-to-end workflow to train an image similarity model. 
 "
-Read-Host -Prompt "Please respond YES to continue"
+$Install = Read-Host -Prompt "Please respond YES to continue"
 
 If($Install -eq "Yes" -or $Install -eq "Y")
 {
