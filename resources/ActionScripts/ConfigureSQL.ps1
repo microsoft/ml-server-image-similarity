@@ -216,4 +216,5 @@ Configuring $SolutionName Solution for Py
 
 "
 $dbname = $db + "_Py"
+}
 
