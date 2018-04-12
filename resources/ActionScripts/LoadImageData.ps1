@@ -7,10 +7,9 @@ Start-Transcript -Path $setupLog
 
 ##Paramaters to pass to ConfigureSQL.ps1
 $StartTime = Get-Date
-$ServerName = $Query = "SELECT SERVERPROPERTY('ServerName')"
-    $si = invoke-sqlcmd -Query $Query
-    $si = $si.Item(0)
-    $serverName = if([string]::IsNullOrEmpty($servername)) {$si}
+ $Query = "SELECT SERVERPROPERTY('ServerName')"
+    $ServerName  = invoke-sqlcmd -Query $Query
+    $ServerName = $ServerName.Item(0)
 Write-Host ("ServerName set to $ServerName")
 $dbName = "ImageSimilarity_Py" 
 $src = "C:\Solutions\ImageSimilarity\Data"
