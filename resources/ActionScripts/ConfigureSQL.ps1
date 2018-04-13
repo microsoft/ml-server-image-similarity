@@ -89,22 +89,21 @@ else
  
 
 ###Conifgure Database for Py 
-if ($isCompatible -eq 'Yes'-and $InstallPy -eq 'Yes')
-{
-$PyStart = get-date
-Write-Host "  
+# if ($isCompatible -eq 'Yes'-and $InstallPy -eq 'Yes')
+# {
+# $PyStart = get-date
+# Write-Host "  
 
-Configuring $SolutionName Solution for Py 
+# Configuring $SolutionName Solution for Py 
 
-"
-$dbname = $db + "_Py"
-}
-
-    $LoadImageData  = "$ScriptPath\LoadData.ps1  $isDeploy"
+# "
+# $dbname = $db + "_Py"
+# }
+    
+    $LoadImageData  = "C:\Solutions\ImageSimilarity\Resources\ActionScripts\LoadImageData.ps1  $isDeploy"
     Write-Host $LoadImageData
  if ($isDeploy -eq "No")
  {
-# $LoadImageData  = "$ScriptPath\LoadData.ps1  $isDeploy"
 # Write-Host $LoadImageData
 Invoke-Expression $LoadImageData 
  }

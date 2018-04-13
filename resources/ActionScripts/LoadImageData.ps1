@@ -1,3 +1,6 @@
+([parameter(Mandatory=$False, Position=1)]
+[string]$isDeploy)
+
 Write-Host " 
 Starting the Image Similarity Data Flow."
 Write-Host " 
