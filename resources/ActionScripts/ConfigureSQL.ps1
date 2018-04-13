@@ -100,10 +100,13 @@ Configuring $SolutionName Solution for Py
 $dbname = $db + "_Py"
 }
 
+    $LoadImageData  = "$ScriptPath\LoadData.ps1  $isDeploy"
+    Write-Host $LoadImageData
  if ($isDeploy -eq "No")
  {
-$LoadImageData = "$ScriptPath\LoadData.ps1  $isDeploy"
-Invoke-Expression $LoadImageData
+# $LoadImageData  = "$ScriptPath\LoadData.ps1  $isDeploy"
+# Write-Host $LoadImageData
+Invoke-Expression $LoadImageData 
  }
  ELSE 
  {
