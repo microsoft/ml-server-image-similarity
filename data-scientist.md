@@ -163,11 +163,6 @@ the predicted scores of all the candidate images are already saved in SQL table 
 4. Calculate the Cosine distance between each query image and all the candidates, based on the distance, return top K similar images for each query images. Users can set up parameter `TOP_K_CANDIDATES` to decide how many similar images should be returned for each query image.
  For example, here we set `TOP_K_CANDIDATES` equal to 5, so in the result table named in `TABLE_RESULTS`, each query image has 10 similar images.
 
-The following table shows a sample results in result table `@results_table`.
-
-
-
-
 
 
 ## Template Contents 
