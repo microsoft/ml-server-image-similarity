@@ -145,11 +145,6 @@ their similarity so that we can evaluate the performance of the model in terms o
 
 3. We calculate top 1, 2, 4, 5, 8, 10, 15, 20, 28 and 32 accuracy to measure the ranking performance.
 
-4. Ranking performance on evaluation images.
-
-    <p align="center">
-    <img src="images/ranking_performance.jpg" alt="alt text" height="300"/>
-    </p>
 
 <a name="step5"></a>
 
@@ -170,93 +165,7 @@ the predicted scores of all the candidate images are already saved in SQL table 
 
 The following table shows a sample results in result table `@results_table`.
 
-<table class="table"  >
-	<thead>
-		<tr>
-			<th>Query_Images</th>
-			<th>Top_5_Candidates</th>
-			<th>Distance</th>
-		</tr>
-	</thead>
-	<tbody class="mid">
-		<tr>
-			<td><img src="images/3135.jpg" width="50px"> zebra\3135.jpg</td>
-            <td><img src="images/3135.jpg" width="50px"> zebra\3135.jpg</td>
-            <td>0</td>
-        </tr>
-        <tr>
-			<td></td>
-            <td><img src="images/101.jpg" width="50px"> zebra\101.jpg</td>
-            <td>6.05E-09</td>
-        </tr>
-        <tr>
-			<td></td>
-            <td><img src="images/839.jpg" width="50px"> zebra\839.jpg</td>
-            <td>8.48E-08</td>
-        </tr>
-        <tr>
-			<td></td>
-            <td><img src="images/2311.jpg" width="50px"> zebra\2311.jpg</td>
-            <td>8.65E-08</td>
-        </tr>
-        <tr>
-			<td></td>
-            <td><img src="images/802.jpg" width="50px"> zebra\802.jpg</td>
-            <td>2.02E-07</td>
-        </tr>
-        <tr>
-			<td><img src="images/2562.jpg" width="50px"> floral\2562.jpg</td>
-            <td><img src="images/2562.jpg" width="50px"> floral\2562.jpg</td>
-            <td>0</td>
-        </tr>
-        <tr>
-			<td></td>
-            <td><img src="images/2590.jpg" width="50px"> floral\2590.jpg</td>
-            <td>0.000515907</td>
-        </tr>
-        <tr>
-			<td></td>
-            <td><img src="images/3316.jpg" width="50px"> floral\3316.jpg</td>
-            <td>0.001025471</td>
-        </tr>
-        <tr>
-			<td></td>
-            <td><img src="images/2568.jpg" width="50px"> floral\2568.jpg</td>
-            <td>0.00104754</td>
-        </tr>
-        <tr>
-			<td></td>
-            <td><img src="images/4025.jpg" width="50px"> floral\4025.jpg</td>
-            <td>0.001170971</td>
-        </tr>
-        <tr>
-			<td><img src="images/3093.jpg" width="50px"> leopard\3093.jpg</td>
-            <td><img src="images/3093.jpg" width="50px"> leopard\3093.jpg</td>
-            <td>1.11E-16</td>
-        </tr>
-        <tr>
-			<td></td>
-            <td><img src="images/2386.jpg" width="50px"> leopard\2386.jpg</td>
-            <td>4.72E-07</td>
-        </tr>
-        <tr>
-			<td></td>
-            <td><img src="images/875.jpg" width="50px"> leopard\875.jpg</td>
-            <td>5.72E-07</td>
-        </tr>
-        <tr>
-			<td></td>
-            <td><img src="images/2393.jpg" width="50px"> leopard\2393.jpg</td>
-            <td>1.28E-06</td>
-        </tr>
-        <tr>
-			<td></td>
-            <td><img src="images/2397.jpg" width="50px"> leopard\2397.jpg</td>
-            <td>1.35E-06</td>
-        </tr>
 
-    </tbody>
-</table>
 
 
 

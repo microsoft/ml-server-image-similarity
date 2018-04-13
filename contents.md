@@ -8,7 +8,7 @@ title: Template Contents
 
 The following is the directory structure for this template:
 
-- [**data**](#data)  This contains all the images used to train and test the image similarity model.
+- [**data**](#data)  This directory is used to download images for this solution. 
 - [**imagesimilarity**](#image-similarity) This directory contains the imagesimilarity package used for the solution
 - [**Python**](#model-development-in-python)  This contains the Python code to prepare training/testing/evaluation set, train the multi-class classifier and evaluate the model.
 - [**Resources**](#resources-for-the-solution-packet) This directory contains other resources for the solution package.
@@ -21,7 +21,9 @@ The following is the directory structure for this template:
 
 <table class="table table-striped table-condensed">
 <tr><th> File </th><th> Description</th></tr>
-<tr><td> .\Data\LengthOfStay.csv  </td><td> Synthetic data modeled after real world hospital inpatient records </td></tr>
+<tr><td> download_data.py </td><td> Python script to download images named in the **fashion_texture_urls.tsv** file. </td></tr>
+<tr><td> fashion_texture_urls.tsv </td><td> list of images and their categorization to be downloaded. </td></tr>
+<tr><td> download_data.bat </td><td> Executes **download_data.py** </td></tr>
 </table>
 
 ### Image Similarity
@@ -57,14 +59,15 @@ Stored procedures in SQL implement the model training workflow.
 <table class="table table-striped table-condensed">
 <tr><th> File </th><th> Description </th></tr>
 
-<tr><td> .\Resources\ActionScripts\ConfigureSQL.ps1</td><td>Configures SQL, called from SetupVM.ps1  </td></tr>
+<tr><td> .\Resources\ActionScripts\ConfigureSQL.ps1</td><td>Configures SQL, called from ImageSimilaritySetup.ps1  </td></tr>
 <tr><td> .\Resources\ActionScripts\CreateDatabase.sql</td><td>Creates the database for this solution, called from ConfigureSQL.ps1  </td></tr>
 <tr><td> .\Resources\ActionScripts\CreateSQLObjectsPy.sql</td><td>Creates the tables and stored procedures for this solution, called from ConfigureSQL.ps1   </td></tr>
-<tr><td> .\Resources\ActionScripts\SetupVM.ps1</td><td>Configures SQL, creates and populates database</td></tr>
-<tr><td> .\Resources\ActionScripts\SolutionHelp.url</td><td>URL to the help page </td></tr>
+<tr><td> .\Resources\ActionScripts\ImageSimilaritySetup.ps1</td><td>Configures SQL, creates and populates database</td></tr>
 <tr><td> .\Resources\ActionScripts\installPyPkg.bat</td><td>Installs the imagesimilarity Python package   </td></tr>
-<tr><td> .\Resources\ActionScripts\query_images.csv</td><td>sample images for querying   </td></tr>
-<tr><td> .\Resources\Images\ </td><td> Directory of images used for the  Readme.md  in this package. </td></tr>
+<tr><td> .\Resources\ActionScripts\LoadImageData.ps1</td><td>Used to trigger the download of images, upload to SQL, and run the solution workflow.  </td></tr>
+<tr><td> .\Resources\ActionScripts\RunOnce.cmd</td><td>Used to run LoadImageData.ps1 the first time a user logs onto the VM.  </td></tr>
+<tr><td> .\Resources\ActionScripts\SolutionHelp.url</td><td>URL to the help page. </td></tr>
+
 </table>
 
 

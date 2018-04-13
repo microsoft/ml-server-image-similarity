@@ -12,5 +12,5 @@ This solution starts with data stored in SQL Server.  The data scientist works f
 
 A small Jupyter notebook **Test Model.ipynb** is used to submit a new image and see the 10 most similar images returned from the model.
 
-<img src="images/rankimages.png">
+
 
