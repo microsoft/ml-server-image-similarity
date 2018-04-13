@@ -28,9 +28,13 @@ $Query =    "INSERT INTO [ImageSimilarity_Py].[dbo].[query_images] VALUES (0,'C:
 Invoke-Sqlcmd -ServerInstance $ServerName -Database $dbName -Query $query 
 
 
-Write-Host "Copy Image Files into FileStream Table"
+Write-Host ("
+    Download Images from Internet")
     Set-Location "C:\Solutions\ImageSimilarity\Data"
     Invoke-Expression ".\download_data.bat"
+
+Write-Host ("
+    Import Images to SQL File Table")
     $src = ".\dotted"         
     ##copy-item -Force -Recurse -Verbose -PassThru $src $dst -ErrorAction SilentlyContinue
     copy-item -Force -Recurse $src $dst -ErrorAction SilentlyContinue
@@ -41,9 +45,11 @@ Write-Host "Copy Image Files into FileStream Table"
     ##copy-item -Force -Recurse -Verbose -PassThru $src $dst -ErrorAction SilentlyContinue
     copy-item -Force -Recurse $src $dst -ErrorAction SilentlyContinue
 
-Write-Host " Image Files Copied to FileStream Table" 
+Write-Host (
+    "Image Files Copied to FileStream Table")
 
-Write-Host (" Training Model and Scoring Data...")
+Write-Host (
+    "Training Model and Scoring Data")
 
 Set-Location "C:\Solutions\ImageSimilarity\Python"
 Invoke-Expression ".\run_image_similarity.bat"
@@ -51,7 +57,8 @@ Invoke-Expression ".\run_image_similarity.bat"
 $Pyend = Get-Date
 
 $Duration = New-TimeSpan -Start $StartTime -End $Pyend 
-Write-Host ("Data Loaded and Trained in $Duration")
+Write-Host (
+    "Data Loaded and Trained in $Duration")
 
 ##Remove Run Once
 Remove-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\RunOnce.cmd"

@@ -16,10 +16,16 @@ param(
 
 [parameter(Mandatory=$false, Position=4)]
 [ValidateNotNullOrEmpty()] 
-[string]$Prompt
+[string]$Prompt,
+
+[parameter(Mandatory=$false, Position=5)]
+[ValidateNotNullOrEmpty()] 
+[string]$isDeploy
 )
 $startTime = Get-Date
 
+
+Write-Host "$isDeploy"
 
 ###Check to see if user is Admin
 
@@ -65,6 +71,9 @@ $scriptPath = $SolutionPath + "\Resources\ActionScripts\"
 $SolutionData = $SolutionPath + "\Data\"
 
 
+###DSVM
+if (Test-Path $SolutionPath) { Write-Host " Solution has already been cloned"}
+ELSE {Invoke-Expression $clone}
 
 
 ##########################################################################
@@ -132,13 +141,15 @@ If ($MixedAuth -eq 'Yes')
 Invoke-Sqlcmd -Query "EXEC xp_instance_regwrite N'HKEY_LOCAL_MACHINE', N'Software\Microsoft\MSSQLServer\MSSQLServer', N'LoginMode', REG_DWORD, 2;" -ServerInstance "LocalHost" 
 }
 
-Write-Host "Configuring SQL to allow running of External Scripts "
+Write-Host ("
+    Configuring SQL to allow running of External Scripts")
 ### Allow Running of External Scripts , this is to allow R Services to Connect to SQL
 Invoke-Sqlcmd -Query "EXEC sp_configure  'external scripts enabled', 1"
 
 ### Force Change in SQL Policy on External Scripts 
 Invoke-Sqlcmd -Query "RECONFIGURE WITH OVERRIDE" 
-Write-Host " SQL Server Configured to allow running of External Scripts "
+Write-Host ("
+    SQL Server Configured to allow running of External Scripts")
 
 ### Enable FileStreamDB if Required by Solution 
 if ($EnableFileStream -eq 'Yes') 
@@ -159,7 +170,8 @@ if ($EnableFileStream -eq 'Yes')
     }
 ELSE
     { 
-    Write-Host "Restarting SQL Services "
+    Write-Host ("
+        Restarting SQL Services")
     ### Changes Above Require Services to be cycled to take effect 
     ### Stop the SQL Service and Launchpad wild cards are used to account for named instances  
     Restart-Service -Name "MSSQ*" -Force
@@ -183,13 +195,15 @@ if($InstallPy -eq 'Yes')
 $src= "C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\Lib\site-packages\microsoftml\mxLibs\resnet*"
 $dest= "C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\PYTHON_SERVICES\Lib\site-packages\microsoftml\mxLibs"
 copy-item $src $dest
-Write-Host "Done with copying ResNet models"
+Write-Host ("
+    Done with copying ResNet models")
 
 # install package for both SQL and ML python
 Set-Location $SolutionPath\Resources\ActionScripts
 $installPyPkg = ".\installPyPkg.bat c:\Solutions\ImageSimilarity"
 Invoke-Expression $installPyPkg 
-Write-Host "Done installing image_similarity package"
+Write-Host ("
+    Done installing image_similarity package")
 
 ##### End of section for ImageSimilarity
 }
@@ -265,8 +279,6 @@ if($SampleWeb  -eq "Yes")
     }
 
 
-##Launch HelpURL 
-###Start-Process "https://microsoft.github.io/$SolutionFullName/"
 
 
 $endTime = Get-Date
