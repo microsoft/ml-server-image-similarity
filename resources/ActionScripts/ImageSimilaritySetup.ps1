@@ -308,6 +308,11 @@ Stop-Transcript
    
 ##Launch HelpURL 
 Start-Process https://microsoft.github.io/ml-server-image-similarity/
+if ($isDeploy -eq "No") 
+{
+Write-Host -NoNewLine 'Press any key to continue...';
+$null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
+}
 }
 
 ELSE 
