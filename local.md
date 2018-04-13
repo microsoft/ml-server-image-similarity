@@ -12,6 +12,8 @@ _Follow the steps in this section only if your local computer is different than 
 
 Connect to the SQL Server computer to perform the following steps.
 
+Install the solution using the [PowerShell Instructions](PowerShell_Instructions.html).
+
 There must be an open Windows firewall to allow a connection to the SQL Server. To open the firewall, execute the following command in a PowerShell window on the SQL Server computer (or VM you deployed from Azure AI Gallery):
 
     netsh advfirewall firewall add rule name="SQLServer" dir=in action=allow protocol=tcp localport=1433

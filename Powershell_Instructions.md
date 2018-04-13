@@ -53,15 +53,16 @@ This will make the following modification to your SQL Server:
 
 * Creates the SLQRUserGroup for running R and Python code.
 * Reconfigures SQL Server to allow running of external scripts.
-* Installs the latest SQL Server 2017 Cumulative Update if no updates have been installed (this solution requires at least CU1 to run successfully).
+* Updates SQL Server version of Python to match the standalone ML Server Python version.
 * Enables firewall access for FILESTREAM
 * Enables FILESTREAM at the SQL instance level as described [here](https://docs.microsoft.com/en-us/sql/relational-imagesbases/blob/enable-the-prerequisites-for-filetable).
 * Copies the Resnet model needed for this solution into the correct directory.
 * Clones the solution code and data into the c:\Solutions\{{ site.folder_name }} directory.
 * Installs the image_similarity Python package.
 * Creates the solution database `{{ site.db_name }}` 
-* Copies images to the configured filestream directory.
-* Runs the solution workflow to populate all database tables.
+* Calls **LoadImageData.ps1** to:
+    * Copy images to the configured filestream directory.
+    * Run the solution workflow to populate all database tables.
 
 <div class="alert alert info">    
 If you wish to run the solution code on a different computer than SQL Server machine, see <a href="local.html">Setup for Local Code Execution</a>.
