@@ -266,8 +266,11 @@ If ($UsePowerBI -eq 'Yes')
 
 ##Create Shortcuts and Autostart Help File 
 Copy-Item "$ScriptPath\$Shortcut" C:\Users\Public\Desktop\
-##Copy-Item "$ScriptPath\$Shortcut" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
+Copy-Item "$ScriptPath\$Shortcut" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
 Write-Host ("Help Files Copied to Desktop")
+
+If($isDeploy -eq "Yes") 
+{Copy-Item "$ScriptPath\RunOnce.cmd" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\RunOnce.cmd"}
 
 
 $WsShell = New-Object -ComObject WScript.Shell

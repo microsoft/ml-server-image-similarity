@@ -39,13 +39,13 @@ Write-Host ("
 Write-Host ("
     Import Images to SQL File Table")
     $src = ".\dotted"         
-    ##copy-item -Force -Recurse -Verbose -PassThru $src $dst -ErrorAction SilentlyContinue
+ 
     copy-item -Force -Recurse $src $dst -ErrorAction SilentlyContinue
     $src = ".\leopard"         
-    ##copy-item -Force -Recurse -Verbose -PassThru $src $dst -ErrorAction SilentlyContinue
+
     copy-item -Force -Recurse $src $dst -ErrorAction SilentlyContinue
     $src = ".\striped"         
-    ##copy-item -Force -Recurse -Verbose -PassThru $src $dst -ErrorAction SilentlyContinue
+
     copy-item -Force -Recurse $src $dst -ErrorAction SilentlyContinue
 
 Write-Host (
@@ -64,7 +64,7 @@ Write-Host (
     "Data Loaded and Trained in $Duration")
 
 ##Remove Run Once
-if ($isDeploy -eq "No")
+if ($isDeploy -eq "Yes")
 {
 Remove-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\RunOnce.cmd"
 }
