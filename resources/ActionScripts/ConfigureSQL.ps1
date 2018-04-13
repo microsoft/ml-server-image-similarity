@@ -22,7 +22,7 @@ param(
 
 $ScriptPath = "C:\Solutions\$SolutionName\Resources\ActionScripts"
 
-
+Write-Host "Is Deploy = $isDeploy"
 ##$db = if ($Prompt -eq 'Y') {Read-Host  -Prompt "Enter Desired Database Base Name"} else {$SolutionName} 
 
 ##########################################################################
@@ -75,6 +75,9 @@ if ($isCompatible -eq 'Yes' -and $InstallPy -eq 'Yes') {
 
 
     Write-Host("SQLServerObjects Created in $dbName Database")
+
+    $LoadImageData  = "C:\Solutions\ImageSimilarity\Resources\ActionScripts\LoadImageData.ps1  $isDeploy"
+    Write-Host $LoadImageData
 
 }
 
