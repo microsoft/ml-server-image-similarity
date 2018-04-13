@@ -16,15 +16,18 @@ param(
 [string]$EnableFileStream,
 
 [parameter(Mandatory=$False, Position=6)]
+[string]$isDeploy,
+
+[parameter(Mandatory=$False, Position=7)]
 [string]$Prompt
 )
 
 $Prompt = 'N'
 
-###$ServerName = if ($Prompt -eq 'Y') {Read-Host  -Prompt "Enter SQL Server Name Or SQL InstanceName you are installing on"} else {$si}
-WRITE-HOST " ServerName set to $ServerName"
+$ScriptPath = "C:\Solutions\$SolutionName\Resources\ActionScripts"
 
-$db = if ($Prompt -eq 'Y') {Read-Host  -Prompt "Enter Desired Database Base Name"} else {$SolutionName} 
+
+##$db = if ($Prompt -eq 'Y') {Read-Host  -Prompt "Enter Desired Database Base Name"} else {$SolutionName} 
 
 ##########################################################################
 
@@ -101,3 +104,12 @@ Configuring $SolutionName Solution for Py
 $dbname = $db + "_Py"
 }
 
+ if (isDeploy -eq "No")
+ {
+$LoadImageData = "$ScriptPath\LoadData.ps1  $isDeploy"
+Invoke-Expression $LoadImageData
+ }
+ ELSE 
+ {
+Copy-Item "$ScriptPath\RunOnce.cmd" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
+}

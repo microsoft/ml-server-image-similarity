@@ -40,7 +40,7 @@ Start-Transcript -Path $setupLog -Append
 $startTime = Get-Date
 Write-Host  "Start time:" $startTime
 
-Write-Host $isDeploy
+$isDeploy = if($isDeploy -eq "Yes") {"Yes"} ELSE {No}
 
 #$Prompt= if ($Prompt -match '^y(es)?$') {'Y'} else {'N'}
 $Prompt = 'N'
@@ -72,9 +72,6 @@ $scriptPath = $SolutionPath + "\Resources\ActionScripts\"
 $SolutionData = $SolutionPath + "\Data\"
 
 
-###DSVM
-if (Test-Path $SolutionPath) { Write-Host " Solution has already been cloned"}
-ELSE {Invoke-Expression $clone}
 
 
 ##########################################################################
@@ -235,7 +232,7 @@ Write-Host "Done installing image_similarity package"
 }
 
 ####Run Configure SQL to Create Databases and Populate with needed Data
-$ConfigureSql = "C:\Solutions\$SolutionName\Resources\ActionScripts\ConfigureSQL.ps1  $ServerName $SolutionName $InstallPy $InstallR $EnableFileStream $Prompt"
+$ConfigureSql = "C:\Solutions\$SolutionName\Resources\ActionScripts\ConfigureSQL.ps1  $ServerName $SolutionName $InstallPy $InstallR $EnableFileStream $Prompt $isDeploy"
 Invoke-Expression $ConfigureSQL 
 
 Write-Host "Done with configuration changes to SQL Server"
@@ -259,7 +256,6 @@ If ($UsePowerBI -eq 'Yes')
 
 ##Create Shortcuts and Autostart Help File 
 Copy-Item "$ScriptPath\$Shortcut" C:\Users\Public\Desktop\
-Copy-Item "$ScriptPath\RunOnce.cmd" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
 ##Copy-Item "$ScriptPath\$Shortcut" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
 Write-Host ("Help Files Copied to Desktop")
 
@@ -295,6 +291,10 @@ Stop-Transcript
    ## if ($baseurl)
    Exit-PSHostProcess
    EXIT
+
+   
+##Launch HelpURL 
+Start-Process https://microsoft.github.io/ml-server-image-similarity/
 }
 
 ELSE 
