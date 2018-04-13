@@ -231,7 +231,7 @@ Write-Host "Done installing image_similarity package"
 }
 
 ####Run Configure SQL to Create Databases and Populate with needed Data
-$ConfigureSql = "C:\Solutions\$SolutionName\Resources\ActionScripts\ConfigureSQL.ps1  $ServerName $SolutionName $InstallPy $InstallR $EnableFileStream $isDeploy $Prompt"
+$ConfigureSql = "C:\Solutions\$SolutionName\Resources\ActionScripts\ConfigureSQL.ps1  $ServerName $SolutionName $InstallPy $InstallR $EnableFileStream $isDeploy"
 Invoke-Expression $ConfigureSQL 
 
 Write-Host "Done with configuration changes to SQL Server"
