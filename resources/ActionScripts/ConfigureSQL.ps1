@@ -13,11 +13,8 @@ param(
 [string]$InstallR,
 
 [parameter(Mandatory=$true, Position=5)]
-[string]$EnableFileStream,
-
-[parameter(Mandatory=$False, Position=6)]
-[string]$isDeploy
-) 
+[string]$EnableFileStream
+)
 
 
 $ScriptPath = "C:\Solutions\$SolutionName\Resources\ActionScripts"
@@ -75,20 +72,6 @@ if ($isCompatible -eq 'Yes' -and $InstallPy -eq 'Yes') {
 
 
     Write-Host("SQLServerObjects Created in $dbName Database")
-
-    $LoadImageData  = "C:\Solutions\ImageSimilarity\Resources\ActionScripts\LoadImageData.ps1  $isDeploy"
-    Write-Host $LoadImageData
-
 }
 
-$LoadImageData  = "C:\Solutions\ImageSimilarity\Resources\ActionScripts\LoadImageData.ps1  $isDeploy"
-Write-Host $LoadImageData
-if ($isDeploy -eq "No")
-{
-# Write-Host $LoadImageData
-Invoke-Expression $LoadImageData 
-}
-ELSE 
-{
-Copy-Item "$ScriptPath\RunOnce.cmd" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
-}
+

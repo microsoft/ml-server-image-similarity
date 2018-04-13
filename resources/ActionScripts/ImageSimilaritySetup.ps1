@@ -231,10 +231,21 @@ Write-Host "Done installing image_similarity package"
 }
 
 ####Run Configure SQL to Create Databases and Populate with needed Data
-$ConfigureSql = "C:\Solutions\$SolutionName\Resources\ActionScripts\ConfigureSQL.ps1  $ServerName $SolutionName $InstallPy $InstallR $EnableFileStream $isDeploy"
+#$ConfigureSql = "C:\Solutions\$SolutionName\Resources\ActionScripts\ConfigureSQL.ps1  $ServerName $SolutionName $InstallPy $InstallR $EnableFileStream"
+$ConfigureSql = "$ScriptPath\ConfigureSQL.ps1  $ServerName $SolutionName $InstallPy $InstallR $EnableFileStream"
 Invoke-Expression $ConfigureSQL 
 
 Write-Host "Done with configuration changes to SQL Server"
+
+#$LoadImageData  = "C:\Solutions\$SolutionName\Resources\ActionScripts\LoadImageData.ps1  $isDeploy"
+$LoadImageData  = "$ScriptPath\LoadImageData.ps1  $isDeploy"
+
+if ($isDeploy -eq "No") 
+    {Invoke-Expression $LoadImageData}
+    ELSE 
+    {Copy-Item "$ScriptPath\RunOnce.cmd" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"}
+
+
 
 If ($UsePowerBI -eq 'Yes') 
 {
