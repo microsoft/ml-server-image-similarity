@@ -25,7 +25,7 @@ param(
 $startTime = Get-Date
 
 
-Write-Host "$isDeploy"
+
 
 ###Check to see if user is Admin
 
@@ -40,6 +40,7 @@ Start-Transcript -Path $setupLog -Append
 $startTime = Get-Date
 Write-Host  "Start time:" $startTime
 
+Write-Host $isDeploy
 
 #$Prompt= if ($Prompt -match '^y(es)?$') {'Y'} else {'N'}
 $Prompt = 'N'
