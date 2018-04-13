@@ -75,39 +75,17 @@ if ($isCompatible -eq 'Yes' -and $InstallPy -eq 'Yes') {
 
 
     Write-Host("SQLServerObjects Created in $dbName Database")
-$OdbcName = "obdc" + $dbname
- ## Create ODBC Connection for PowerBI to Use 
-Add-OdbcDsn -Name $OdbcName -DriverName "ODBC Driver 13 for SQL Server" -DsnType 'System' -Platform '64-bit' -SetPropertyValue @("Server=$ServerName", "Trusted_Connection=Yes", "Database=$dbName") -ErrorAction SilentlyContinue -PassThru
 
 }
-else 
+
+$LoadImageData  = "C:\Solutions\ImageSimilarity\Resources\ActionScripts\LoadImageData.ps1  $isDeploy"
+Write-Host $LoadImageData
+if ($isDeploy -eq "No")
 {
-    if ($isCompatible -eq 'Yes' -and $InstallPy -eq 'Yes') {"This Version of SQL is not compatible with Py , Py Code and DB's will not be Created "}
-    else
-    {Write-Host "There is not a py version of this solution"}
-}
- 
-
-###Conifgure Database for Py 
-# if ($isCompatible -eq 'Yes'-and $InstallPy -eq 'Yes')
-# {
-# $PyStart = get-date
-# Write-Host "  
-
-# Configuring $SolutionName Solution for Py 
-
-# "
-# $dbname = $db + "_Py"
-# }
-    
-    $LoadImageData  = "C:\Solutions\ImageSimilarity\Resources\ActionScripts\LoadImageData.ps1  $isDeploy"
-    Write-Host $LoadImageData
- if ($isDeploy -eq "No")
- {
 # Write-Host $LoadImageData
 Invoke-Expression $LoadImageData 
- }
- ELSE 
- {
+}
+ELSE 
+{
 Copy-Item "$ScriptPath\RunOnce.cmd" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
 }
