@@ -40,10 +40,9 @@ Start-Transcript -Path $setupLog -Append
 $startTime = Get-Date
 Write-Host  "Start time:" $startTime
 
-$isDeploy = if($isDeploy -eq "Yes") {"Yes"} ELSE {No}
+$isDeploy = if($isDeploy -eq "Yes") {"Yes"} ELSE {"No"}
 
 #$Prompt= if ($Prompt -match '^y(es)?$') {'Y'} else {'N'}
-$Prompt = 'N'
 
 ##Change Values here for Different Solutions 
 $SolutionName = "ImageSimilarity"

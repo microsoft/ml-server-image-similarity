@@ -6,7 +6,7 @@ onto your machine, upload them to SQL and execute the end-to-end workflow to tra
 "
 $Install = Read-Host -Prompt "Please respond YES to continue"
 
-If($Install -eq "Yes" -or $Install -eq "Y")
+If($Install -match '^y(es)?$')
 {
 $setupLog = "c:\tmp\ConfigureImageSimilarity.txt"
 Start-Transcript -Path $setupLog 
