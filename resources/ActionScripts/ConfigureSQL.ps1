@@ -16,13 +16,9 @@ param(
 [string]$EnableFileStream,
 
 [parameter(Mandatory=$False, Position=6)]
-[string]$isDeploy,
+[string]$isDeploy
+) 
 
-[parameter(Mandatory=$False, Position=7)]
-[string]$Prompt
-)
-
-$Prompt = 'N'
 
 $ScriptPath = "C:\Solutions\$SolutionName\Resources\ActionScripts"
 
@@ -104,7 +100,7 @@ Configuring $SolutionName Solution for Py
 $dbname = $db + "_Py"
 }
 
- if (isDeploy -eq "No")
+ if ($isDeploy -eq "No")
  {
 $LoadImageData = "$ScriptPath\LoadData.ps1  $isDeploy"
 Invoke-Expression $LoadImageData
