@@ -218,8 +218,16 @@ Invoke-Expression $ConfigureSQL
 
 Write-Host "Done with configuration changes to SQL Server"
 
+Remove-Item "$ScriptPath\$Shortcut" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\" -ErrorAction SilentlyContinue
+
 #$LoadImageData  = "C:\Solutions\$SolutionName\Resources\ActionScripts\LoadImageData.ps1  $isDeploy"
 $LoadImageData  = "$ScriptPath\LoadImageData.ps1  $isDeploy"
+
+
+##Create Shortcuts and Autostart Help File 
+Copy-Item "$ScriptPath\$Shortcut" C:\Users\Public\Desktop\
+Copy-Item "$ScriptPath\$Shortcut" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
+Write-Host ("Help Files Copied to Desktop")
 
 if ($isDeploy -eq "No") 
     {Invoke-Expression $LoadImageData}
@@ -244,7 +252,7 @@ If ($UsePowerBI -eq 'Yes')
 }
 
 
-Remove-Item "$ScriptPath\$Shortcut" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\" -ErrorAction SilentlyContinue
+
 
 
 If($isDeploy -eq "Yes") 
@@ -280,10 +288,7 @@ $Duration = New-TimeSpan -Start $StartTime -End $EndTime
 Write-Host (" Total Deployment Time = $Duration") 
 
 
-##Create Shortcuts and Autostart Help File 
-Copy-Item "$ScriptPath\$Shortcut" C:\Users\Public\Desktop\
-Copy-Item "$ScriptPath\$Shortcut" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
-Write-Host ("Help Files Copied to Desktop")
+
 
 
 
