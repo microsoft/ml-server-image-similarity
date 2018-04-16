@@ -19,7 +19,9 @@ param(
 
 $ScriptPath = "C:\Solutions\$SolutionName\Resources\ActionScripts"
 
-$db = if ($Prompt -eq 'Y') {Read-Host  -Prompt "Enter Desired Database Base Name"} else {$SolutionName} 
+$Prompt = 'No'
+
+$db = if ($Prompt -eq 'Yes') {Read-Host  -Prompt "Enter Desired Database Base Name"} else {$SolutionName} 
 
 ##########################################################################
 

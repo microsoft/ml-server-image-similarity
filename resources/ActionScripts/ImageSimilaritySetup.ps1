@@ -60,7 +60,6 @@ $UsePowerBI = 'No' ## If Solution uses PowerBI
 $Prompt = 'N'
 $MixedAuth = 'No'
 
-Y
 ###These probably don't need to change , but make sure files are placed in the correct directory structure 
 $solutionTemplateName = "Solutions"
 $solutionTemplatePath = "C:\" + $solutionTemplateName
@@ -295,7 +294,6 @@ Stop-Transcript
 ##Launch HelpURL 
 Start-Process https://microsoft.github.io/ml-server-image-similarity/
 
-}
 }
 
 ELSE 
