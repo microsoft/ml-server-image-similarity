@@ -19,8 +19,7 @@ param(
 
 $ScriptPath = "C:\Solutions\$SolutionName\Resources\ActionScripts"
 
-Write-Host "Is Deploy = $isDeploy"
-##$db = if ($Prompt -eq 'Y') {Read-Host  -Prompt "Enter Desired Database Base Name"} else {$SolutionName} 
+$db = if ($Prompt -eq 'Y') {Read-Host  -Prompt "Enter Desired Database Base Name"} else {$SolutionName} 
 
 ##########################################################################
 

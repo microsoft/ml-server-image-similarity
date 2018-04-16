@@ -60,7 +60,7 @@ $UsePowerBI = 'No' ## If Solution uses PowerBI
 $Prompt = 'N'
 $MixedAuth = 'No'
 
-
+Y
 ###These probably don't need to change , but make sure files are placed in the correct directory structure 
 $solutionTemplateName = "Solutions"
 $solutionTemplatePath = "C:\" + $solutionTemplateName
@@ -183,8 +183,14 @@ Invoke-Sqlcmd -Query $Query -ErrorAction SilentlyContinue
 $Query = "ALTER SERVER ROLE [sysadmin] ADD MEMBER $username"
 Invoke-Sqlcmd -Query $Query -ErrorAction SilentlyContinue
 }
-####Instal Python 
 
+
+###Unbind Python 
+Set-Location $scriptPath
+invoke-expression ".\UpdateMLServer.bat"
+Write-Host "ML Server has been updated"
+
+####Instal Python 
 
 if($InstallPy -eq 'Yes')
 {
@@ -205,31 +211,6 @@ Write-Host ("
 ##### End of section for ImageSimilarity
 }
 
-###Unbind Python 
-    Set-Location $scriptPath
-    invoke-expression ".\UpdateMLServer.bat"
-    Write-Host "ML Server has been updated"
-
-####Instal Python 
-
-if($InstallPy -eq 'Yes')
-{
-#### Section for ImageSimilarity - install python package and copy resnet files
-$src= "C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\Lib\site-packages\microsoftml\mxLibs\resnet*"
-$dest= "C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\PYTHON_SERVICES\Lib\site-packages\microsoftml\mxLibs"
-copy-item $src $dest
-Write-Host "Done with copying ResNet models"
-
-# install package for both SQL and ML python
-Set-Location $SolutionPath\Resources\ActionScripts
-$installPyPkg = ".\installPyPkg.bat c:\Solutions\ImageSimilarity"
-Invoke-Expression $installPyPkg 
-Write-Host ("
-    Done installing image_similarity package")
-
-##### End of section for ImageSimilarity
-
-}
 
 ####Run Configure SQL to Create Databases and Populate with needed Data
 #$ConfigureSql = "C:\Solutions\$SolutionName\Resources\ActionScripts\ConfigureSQL.ps1  $ServerName $SolutionName $InstallPy $InstallR $EnableFileStream"
@@ -314,6 +295,7 @@ Stop-Transcript
 ##Launch HelpURL 
 Start-Process https://microsoft.github.io/ml-server-image-similarity/
 
+}
 }
 
 ELSE 
