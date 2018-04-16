@@ -269,18 +269,18 @@ if($SampleWeb  -eq "Yes")
     (Get-Content $SolutionPath\Website\server.js).replace('XXYOURSQLUSER', $username) | Set-Content $SolutionPath\Website\server.js
     }
 
-if ($isDeploy -eq "No") 
-    {
-    Write-Host -NoNewLine 'Press any key to continue...';
-    $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
-    }
+# if ($isDeploy -eq "No") 
+#     {
+#     Write-Host -NoNewLine 'Press any key to continue...';
+#     $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
+#     }
 
 
 $endTime = Get-Date
 
-Write-Host -foregroundcolor 'green'(" $SolutionFullName Workflow Finished Successfully!")
+Write-Host (" $SolutionFullName Workflow Finished Successfully!")
 $Duration = New-TimeSpan -Start $StartTime -End $EndTime 
-Write-Host -ForegroundColor 'green'(" Total Deployment Time = $Duration") 
+Write-Host (" Total Deployment Time = $Duration") 
 
 
 Stop-Transcript
