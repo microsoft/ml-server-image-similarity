@@ -244,11 +244,8 @@ If ($UsePowerBI -eq 'Yes')
 }
 
 
+Remove-Item "$ScriptPath\$Shortcut" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\" -ErrorAction SilentlyContinue
 
-##Create Shortcuts and Autostart Help File 
-Copy-Item "$ScriptPath\$Shortcut" C:\Users\Public\Desktop\
-Copy-Item "$ScriptPath\$Shortcut" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
-Write-Host ("Help Files Copied to Desktop")
 
 If($isDeploy -eq "Yes") 
 {Copy-Item "$ScriptPath\RunOnce.cmd" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\RunOnce.cmd"}
@@ -281,6 +278,13 @@ $endTime = Get-Date
 Write-Host (" $SolutionFullName Workflow Finished Successfully!")
 $Duration = New-TimeSpan -Start $StartTime -End $EndTime 
 Write-Host (" Total Deployment Time = $Duration") 
+
+
+##Create Shortcuts and Autostart Help File 
+Copy-Item "$ScriptPath\$Shortcut" C:\Users\Public\Desktop\
+Copy-Item "$ScriptPath\$Shortcut" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
+Write-Host ("Help Files Copied to Desktop")
+
 
 
 Stop-Transcript
