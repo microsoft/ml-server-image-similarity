@@ -77,6 +77,13 @@ $Duration = New-TimeSpan -Start $StartTime -End $Pyend
 Write-Host ("
     Data Loaded and Trained in $Duration")
 
+if($isDeploy -eq "Yes")
+    {
+    Copy-Item "$ScriptPath\$Shortcut" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
+    ##Launch HelpURL 
+    Start-Process https://microsoft.github.io/ml-server-image-similarity/
+    }  
+
 ##Remove Run Once
 Remove-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\RunOnce.cmd" -ErrorAction SilentlyContinue
 
@@ -86,10 +93,5 @@ Images have been loaded into SQL and the data has been trained and scored.
 
 Press the Enter Key to continue")
 
-if($isDeploy -eq "Yes")
-{
-Copy-Item "$ScriptPath\$Shortcut" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
-##Launch HelpURL 
-Start-Process https://microsoft.github.io/ml-server-image-similarity/
-}   
+ 
 }
