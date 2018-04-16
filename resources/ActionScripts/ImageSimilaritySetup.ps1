@@ -306,7 +306,10 @@ Stop-Transcript
 
    
 ##Launch HelpURL 
-Start-Process https://microsoft.github.io/ml-server-image-similarity/
+if($isDeploy -eq "No") 
+    {
+    Start-Process https://microsoft.github.io/ml-server-image-similarity/
+    }
 
 }
 

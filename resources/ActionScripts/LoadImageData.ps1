@@ -86,6 +86,8 @@ Images have been loaded into SQL and the data has been trained and scored.
 
 Press the Enter Key to continue")
 
+
 ##Launch HelpURL 
 Start-Process https://microsoft.github.io/ml-server-image-similarity/
+    
 }
