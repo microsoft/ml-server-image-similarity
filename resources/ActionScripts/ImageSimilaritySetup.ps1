@@ -198,14 +198,14 @@ $src= "C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\Lib\site-packages\micr
 $dest= "C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\PYTHON_SERVICES\Lib\site-packages\microsoftml\mxLibs"
 copy-item $src $dest
 Write-Host ("
-    Done with copying ResNet models")
+Done with copying ResNet models")
 
 # install package for both SQL and ML python
 Set-Location $SolutionPath\Resources\ActionScripts
 $installPyPkg = ".\installPyPkg.bat c:\Solutions\ImageSimilarity"
 Invoke-Expression $installPyPkg 
 Write-Host ("
-    Done installing image_similarity package")
+Done installing image_similarity package")
 
 ##### End of section for ImageSimilarity
 }
@@ -234,7 +234,6 @@ if ($isDeploy -eq "No")
     ELSE 
     {
     Copy-Item "$ScriptPath\RunOnce.cmd" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
-    Copy-Item "$ScriptPath\$Shortcut" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
     }
 
 
@@ -255,11 +254,6 @@ If ($UsePowerBI -eq 'Yes')
 }
 
 
-
-
-
-If($isDeploy -eq "Yes") 
-{Copy-Item "$ScriptPath\RunOnce.cmd" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\RunOnce.cmd"}
 
 
 $WsShell = New-Object -ComObject WScript.Shell
@@ -304,7 +298,7 @@ Stop-Transcript
 
    
 ##Launch HelpURL 
-if($isDeploy -eq "No") 
+if(!$isDeploy -eq "Yes") 
     {
     Start-Process https://microsoft.github.io/ml-server-image-similarity/
     }
