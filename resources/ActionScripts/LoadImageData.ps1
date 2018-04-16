@@ -41,9 +41,11 @@ Write-Host "Copy Image Files into FileStream Table"
 
     copy-item -Force -Recurse $src $dst -ErrorAction SilentlyContinue
 
-Write-Host " Image Files Copied to FileStream Table" 
+Write-Host ("
+    Image Files Copied to FileStream Table" )
 
-Write-Host (" Training Model and Scoring Data...")
+Write-Host ("
+    Training Model and Scoring Data...")
 
 # Set-Location "C:\Solutions\ImageSimilarity\Python"
 # Invoke-Expression ".\run_image_similarity.bat"
@@ -55,7 +57,8 @@ Invoke-Sqlcmd -ServerInstance $ServerName -Database $dbName -Query $query -Conne
 $Pyend = Get-Date
 
 $Duration = New-TimeSpan -Start $StartTime -End $Pyend 
-Write-Host ("Data Loaded and Trained in $Duration")
+Write-Host ("
+    Data Loaded and Trained in $Duration")
 
 ##Remove Run Once
 Remove-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\RunOnce.cmd" -ErrorAction SilentlyContinue
