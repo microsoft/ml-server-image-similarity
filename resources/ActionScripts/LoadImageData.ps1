@@ -1,6 +1,3 @@
-([parameter(Mandatory=$False, Position=1)]
-[string]$isDeploy)
-
 Write-Host " 
 Starting the Image Similarity Data Flow."
 Write-Host " 
@@ -9,7 +6,7 @@ onto your machine, upload them to SQL and execute the end-to-end workflow to tra
 "
 $Install = Read-Host -Prompt "Please respond YES to continue"
 
-If($Install -match '^y(es)?$')
+If($Install -eq "Yes" -or $Install -eq "Y")
 {
 $setupLog = "c:\tmp\ConfigureImageSimilarity.txt"
 Start-Transcript -Path $setupLog 
@@ -24,53 +21,54 @@ $dbName = "ImageSimilarity_Py"
 $src = "C:\Solutions\ImageSimilarity\Data"
 $dst = "\\$ServerName\MSSQLSERVER\FileTableData\ImageStore\"
 
-$Query =    "INSERT INTO [ImageSimilarity_Py].[dbo].[query_images] VALUES (0,'C:\Solutions\ImageSimilarity\data\dotted\81.jpg')
-            INSERT INTO [ImageSimilarity_Py].[dbo].[query_images] VALUES (0,'C:\Solutions\ImageSimilarity\data\leopard\147.jpg')
-            INSERT INTO [ImageSimilarity_Py].[dbo].[query_images] VALUES (0,'C:\Solutions\ImageSimilarity\data\striped\379.jpg')"
+$Query =    "INSERT INTO [ImageSimilarity_Py].[dbo].[query_images] VALUES (0,'C:\Solutions\ImageSimilarity\data\dotted\81.jpg')"
+            # INSERT INTO [ImageSimilarity_Py].[dbo].[query_images] VALUES (0,'C:\Solutions\ImageSimilarity\data\fashionTexture\floral\2562.jpg')
+            # INSERT INTO [ImageSimilarity_Py].[dbo].[query_images] VALUES (0,'C:\Solutions\ImageSimilarity\data\fashionTexture\leopard\3093.jpg')"
 
 Invoke-Sqlcmd -ServerInstance $ServerName -Database $dbName -Query $query 
 
 
-Write-Host ("
-    Download Images from Internet")
+Write-Host "Copy Image Files into FileStream Table"
     Set-Location "C:\Solutions\ImageSimilarity\Data"
-    Invoke-Expression ".\download_data.bat"
-
-Write-Host ("
-    Import Images to SQL File Table")
+    Invoke-Expression ".\import_data.bat"
     $src = ".\dotted"         
- 
+    copy-item -Force -Recurse -Verbose -PassThru $src $dst -ErrorAction SilentlyContinue
     copy-item -Force -Recurse $src $dst -ErrorAction SilentlyContinue
     $src = ".\leopard"         
-
+    copy-item -Force -Recurse -Verbose -PassThru $src $dst -ErrorAction SilentlyContinue
     copy-item -Force -Recurse $src $dst -ErrorAction SilentlyContinue
     $src = ".\striped"         
-
+    copy-item -Force -Recurse -Verbose -PassThru $src $dst -ErrorAction SilentlyContinue
     copy-item -Force -Recurse $src $dst -ErrorAction SilentlyContinue
 
-Write-Host (
-    "Image Files Copied to FileStream Table")
+Write-Host " Image Files Copied to FileStream Table" 
 
-Write-Host (
-    "Training Model and Scoring Data")
+Write-Host (" Training Model and Scoring Data...")
 
-Set-Location "C:\Solutions\ImageSimilarity\Python"
-Invoke-Expression ".\run_image_similarity.bat"
+# Set-Location "C:\Solutions\ImageSimilarity\Python"
+# Invoke-Expression ".\run_image_similarity.bat"
+
+$query = "EXEC Inital_Run_Once_Py"
+Invoke-Sqlcmd -ServerInstance $ServerName -Database $dbName -Query $query -ConnectionTimeout  0 -QueryTimeout 0
+
 
 $Pyend = Get-Date
 
 $Duration = New-TimeSpan -Start $StartTime -End $Pyend 
-Write-Host (
-    "Data Loaded and Trained in $Duration")
+Write-Host ("Data Loaded and Trained in $Duration")
 
 ##Remove Run Once
-if ($isDeploy -eq "Yes")
-{
-Remove-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\RunOnce.cmd"
-}
+Remove-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\RunOnce.cmd" -ErrorAction SilentlyContinue
 
 ##Copy Url to Start Menu
 Copy-Item "C:\Solutions\ImageSimilarity\Resources\ActionScripts\SolutionHelp.url" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
 
-Read-Host "Press the Enter Key To Continue"
+Read-Host ("
+Images have been loaded into SQL and the data has been trained and scored. 
+
+
+Press the Enter Key to continue")
+
+##Launch HelpURL 
+Start-Process https://microsoft.github.io/ml-server-image-similarity/
 }
