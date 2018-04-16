@@ -226,13 +226,18 @@ $LoadImageData  = "$ScriptPath\LoadImageData.ps1  $isDeploy"
 
 ##Create Shortcuts and Autostart Help File 
 Copy-Item "$ScriptPath\$Shortcut" C:\Users\Public\Desktop\
+
+
 Copy-Item "$ScriptPath\$Shortcut" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
 Write-Host ("Help Files Copied to Desktop")
 
 if ($isDeploy -eq "No") 
     {Invoke-Expression $LoadImageData}
     ELSE 
-    {Copy-Item "$ScriptPath\RunOnce.cmd" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"}
+    {
+    Copy-Item "$ScriptPath\RunOnce.cmd" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
+    Copy-Item "$ScriptPath\$Shortcut" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
+    }
 
 
 

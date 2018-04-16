@@ -1,3 +1,13 @@
+param(
+[parameter(Mandatory=$false, Position=1)]
+[ValidateNotNullOrEmpty()] 
+[string]$isDeploy
+)
+
+
+
+
+
 Write-Host " 
 Starting the Image Similarity Data Flow."
 Write-Host " 
@@ -10,6 +20,13 @@ If($Install -eq "Yes" -or $Install -eq "Y")
 {
     $setupLog = "c:\tmp\setup_log.txt"
     Start-Transcript -Path $setupLog -Append
+
+
+    ##Copy Url to Start Menu
+if ($isDeploy -eq "Yes")
+    {
+    Copy-Item "C:\Solutions\ImageSimilarity\Resources\ActionScripts\SolutionHelp.url" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
+    }
 
 ##Paramaters to pass to ConfigureSQL.ps1
 $StartTime = Get-Date
@@ -62,9 +79,6 @@ Write-Host ("
 
 ##Remove Run Once
 Remove-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\RunOnce.cmd" -ErrorAction SilentlyContinue
-
-##Copy Url to Start Menu
-Copy-Item "C:\Solutions\ImageSimilarity\Resources\ActionScripts\SolutionHelp.url" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
 
 Read-Host ("
 Images have been loaded into SQL and the data has been trained and scored. 
