@@ -8,8 +8,8 @@ $Install = Read-Host -Prompt "Please respond YES to continue"
 
 If($Install -eq "Yes" -or $Install -eq "Y")
 {
-$setupLog = "c:\tmp\ConfigureImageSimilarity.txt"
-Start-Transcript -Path $setupLog 
+    $setupLog = "c:\tmp\setup_log.txt"
+    Start-Transcript -Path $setupLog -Append
 
 ##Paramaters to pass to ConfigureSQL.ps1
 $StartTime = Get-Date
