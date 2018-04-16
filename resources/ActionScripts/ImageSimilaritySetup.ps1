@@ -228,8 +228,6 @@ $LoadImageData  = "$ScriptPath\LoadImageData.ps1  $isDeploy"
 Copy-Item "$ScriptPath\$Shortcut" C:\Users\Public\Desktop\
 
 
-Copy-Item "$ScriptPath\$Shortcut" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
-Write-Host ("Help Files Copied to Desktop")
 
 if ($isDeploy -eq "No") 
     {Invoke-Expression $LoadImageData}
