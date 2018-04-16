@@ -51,7 +51,7 @@ $Shortcut = "SolutionHelp.url"
 
 
 ### DON'T FORGET TO CHANGE TO MASTER LATER...
-$Branch = "master" 
+$Branch = "dev" 
 $InstallR = 'No'  ## If Solution has a R Version this should be 'Yes' Else 'No'
 $InstallPy = 'Yes' ## If Solution has a Py Version this should be 'Yes' Else 'No'
 $SampleWeb = 'No' ## If Solution has a Sample Website  this should be 'Yes' Else 'No' 
@@ -224,7 +224,8 @@ Write-Host "Done with copying ResNet models"
 Set-Location $SolutionPath\Resources\ActionScripts
 $installPyPkg = ".\installPyPkg.bat c:\Solutions\ImageSimilarity"
 Invoke-Expression $installPyPkg 
-Write-Host "Done installing image_similarity package"
+Write-Host ("
+    Done installing image_similarity package")
 
 ##### End of section for ImageSimilarity
 
