@@ -218,7 +218,7 @@ Invoke-Expression $ConfigureSQL
 
 Write-Host "Done with configuration changes to SQL Server"
 
-Remove-Item "$ScriptPath\$Shortcut" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\" -ErrorAction SilentlyContinue
+Remove-Item  "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\$Shortcut" -ErrorAction SilentlyContinue
 
 #$LoadImageData  = "C:\Solutions\$SolutionName\Resources\ActionScripts\LoadImageData.ps1  $isDeploy"
 $LoadImageData  = "$ScriptPath\LoadImageData.ps1  $isDeploy"
