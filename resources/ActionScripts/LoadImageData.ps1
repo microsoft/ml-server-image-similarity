@@ -81,7 +81,7 @@ Write-Host ("
 
     Copy-Item "$ScriptPath\$Shortcut" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
     ##Launch HelpURL 
-    Start-Process https://microsoft.github.io/ml-server-image-similarity/
+    
  
 
 ##Remove Run Once
@@ -92,6 +92,8 @@ Images have been loaded into SQL and the model has been trained and the data has
 
 
 Press the Enter Key to continue")
+
+Start-Process https://microsoft.github.io/ml-server-image-similarity/
 
  
 }
