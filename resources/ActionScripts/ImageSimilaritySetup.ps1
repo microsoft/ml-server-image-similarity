@@ -113,10 +113,10 @@ if ($EnableFileStream -eq 'Yes')
     {
     netsh advfirewall firewall add rule name="Open Port 139" dir=in action=allow protocol=TCP localport=139
     netsh advfirewall firewall add rule name="Open Port 445" dir=in action=allow protocol=TCP localport=445
-    Write-Host "Firewall has been opened for filestream access..."
+Write-Host (
+"Firewall has been opened for filestream access")
     }
 
- 
 
 ############################################################################################
 #Configure SQL to Run our Solutions 
@@ -126,13 +126,15 @@ if ($EnableFileStream -eq 'Yes')
 if([string]::IsNullOrEmpty($servername))
 {
 $Query = "SELECT SERVERPROPERTY('ServerName')"
-$servername = invoke-sqlcmd -Query $Query
-$servername = $servername.Item(0)
+$si = invoke-sqlcmd -Query $Query
+$si = $si.Item(0)
+$servername = $si
 }
 ELSE 
 {$serverName} 
 
-Write-Host ("ServerName set to $ServerName")
+Write-Host ("
+ServerName set to $ServerName")
 
 
 ### Change Authentication From Windows Auth to Mixed Mode 
