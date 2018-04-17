@@ -13,18 +13,15 @@ param(
 [string]$InstallR,
 
 [parameter(Mandatory=$true, Position=5)]
-[string]$EnableFileStream,
-
-[parameter(Mandatory=$False, Position=6)]
-[string]$Prompt
+[string]$EnableFileStream
 )
 
-$Prompt = 'N'
 
-###$ServerName = if ($Prompt -eq 'Y') {Read-Host  -Prompt "Enter SQL Server Name Or SQL InstanceName you are installing on"} else {$si}
-WRITE-HOST " ServerName set to $ServerName"
+$ScriptPath = "C:\Solutions\$SolutionName\Resources\ActionScripts"
 
-$db = if ($Prompt -eq 'Y') {Read-Host  -Prompt "Enter Desired Database Base Name"} else {$SolutionName} 
+$Prompt = 'No'
+
+$db = if ($Prompt -eq 'Yes') {Read-Host  -Prompt "Enter Desired Database Base Name"} else {$SolutionName} 
 
 ##########################################################################
 
@@ -76,28 +73,6 @@ if ($isCompatible -eq 'Yes' -and $InstallPy -eq 'Yes') {
 
 
     Write-Host("SQLServerObjects Created in $dbName Database")
-$OdbcName = "obdc" + $dbname
- ## Create ODBC Connection for PowerBI to Use 
-Add-OdbcDsn -Name $OdbcName -DriverName "ODBC Driver 13 for SQL Server" -DsnType 'System' -Platform '64-bit' -SetPropertyValue @("Server=$ServerName", "Trusted_Connection=Yes", "Database=$dbName") -ErrorAction SilentlyContinue -PassThru
-
 }
-else 
-{
-    if ($isCompatible -eq 'Yes' -and $InstallPy -eq 'Yes') {"This Version of SQL is not compatible with Py , Py Code and DB's will not be Created "}
-    else
-    {Write-Host "There is not a py version of this solution"}
-}
- 
 
-###Conifgure Database for Py 
-if ($isCompatible -eq 'Yes'-and $InstallPy -eq 'Yes')
-{
-$PyStart = get-date
-Write-Host "  
-
-Configuring $SolutionName Solution for Py 
-
-"
-$dbname = $db + "_Py"
-}
 
