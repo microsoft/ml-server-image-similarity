@@ -131,7 +131,7 @@ $si = $si.Item(0)
 $servername = $si
 }
 ELSE 
-{$serverName} 
+{$servername} 
 
 Write-Host ("
 ServerName set to $ServerName")
