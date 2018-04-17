@@ -79,7 +79,6 @@ Write-Host ("
     Data Loaded and Trained in $Duration")
 
 
-    Copy-Item "c:\Solutions\ImageSimilarity\Resources\ActionScripts\SolutionHelp.url" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
     ##Launch HelpURL 
     
  
@@ -96,4 +95,8 @@ Press the Enter Key to continue")
 Start-Process https://microsoft.github.io/ml-server-image-similarity/
 
  
+}
+ELSE 
+{
+Start-Process https://microsoft.github.io/ml-server-image-similarity/
 }
