@@ -79,7 +79,7 @@ Write-Host ("
     Data Loaded and Trained in $Duration")
 
 
-    Copy-Item $ScriptPath\$Shortcut "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
+    Copy-Item "c:\Solutions\ImageSimilarity\Resources\ActionScripts\SolutionHelp.url" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
     ##Launch HelpURL 
     
  
