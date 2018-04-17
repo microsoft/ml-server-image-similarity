@@ -123,11 +123,15 @@ if ($EnableFileStream -eq 'Yes')
 ############################################################################################
 
 
-
+if([string]::IsNullOrEmpty($servername))
+{
 $Query = "SELECT SERVERPROPERTY('ServerName')"
-$si = invoke-sqlcmd -Query $Query
-$si = $si.Item(0)
-$serverName = if([string]::IsNullOrEmpty($servername)) {$si}
+$servername = invoke-sqlcmd -Query $Query
+$servername = $servername.Item(0)
+}
+ELSE 
+{$serverName} 
+
 Write-Host ("ServerName set to $ServerName")
 
 
