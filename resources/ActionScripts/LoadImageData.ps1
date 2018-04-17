@@ -12,7 +12,8 @@ Write-Host "
 Starting the Image Similarity Data Flow."
 Write-Host " 
 This script will download all images listed in ""c:\Solutions\ImageSimilarity\fashion_texture_urls.tsv"" 
-onto your machine, upload them to SQL and execute the end-to-end workflow to train an image similarity model. 
+onto your machine, upload them to SQL and execute the end-to-end workflow to train an image similarity model.
+This portion of the script will take about 6 minutes to complete.
 "
 $Install = Read-Host -Prompt "Please respond YES to continue"
 
@@ -38,9 +39,9 @@ $dbName = "ImageSimilarity_Py"
 $src = "C:\Solutions\ImageSimilarity\Data"
 $dst = "\\$ServerName\MSSQLSERVER\FileTableData\ImageStore\"
 
-$Query =    "INSERT INTO [ImageSimilarity_Py].[dbo].[query_images] VALUES (0,'C:\Solutions\ImageSimilarity\data\dotted\81.jpg')"
-            # INSERT INTO [ImageSimilarity_Py].[dbo].[query_images] VALUES (0,'C:\Solutions\ImageSimilarity\data\fashionTexture\floral\2562.jpg')
-            # INSERT INTO [ImageSimilarity_Py].[dbo].[query_images] VALUES (0,'C:\Solutions\ImageSimilarity\data\fashionTexture\leopard\3093.jpg')"
+$Query =    "INSERT INTO [ImageSimilarity_Py].[dbo].[query_images] VALUES (0,'C:\Solutions\ImageSimilarity\data\dotted\81.jpg')
+            INSERT INTO [ImageSimilarity_Py].[dbo].[query_images] VALUES (0,'C:\Solutions\ImageSimilarity\data\striped\379.jpg')
+            INSERT INTO [ImageSimilarity_Py].[dbo].[query_images] VALUES (0,'C:\Solutions\ImageSimilarity\data\leopard\147.jpg')"
 
 Invoke-Sqlcmd -ServerInstance $ServerName -Database $dbName -Query $query 
 
@@ -77,18 +78,17 @@ $Duration = New-TimeSpan -Start $StartTime -End $Pyend
 Write-Host ("
     Data Loaded and Trained in $Duration")
 
-if($isDeploy -eq "Yes")
-    {
+
     Copy-Item "$ScriptPath\$Shortcut" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
     ##Launch HelpURL 
     Start-Process https://microsoft.github.io/ml-server-image-similarity/
-    }  
+ 
 
 ##Remove Run Once
 Remove-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\RunOnce.cmd" -ErrorAction SilentlyContinue
 
 Read-Host ("
-Images have been loaded into SQL and the data has been trained and scored. 
+Images have been loaded into SQL and the model has been trained and the data has been scored. 
 
 
 Press the Enter Key to continue")
