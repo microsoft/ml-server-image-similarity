@@ -98,5 +98,5 @@ Start-Process https://microsoft.github.io/ml-server-image-similarity/
 }
 ELSE 
 {
-Start-Process https://microsoft.github.io/ml-server-image-similarity/
+Start-Process https://microsoft.github.io/ml-server-image-similarity/first_time.html
 }
