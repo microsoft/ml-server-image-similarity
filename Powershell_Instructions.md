@@ -20,7 +20,7 @@ title: PowerShell Instructions
     </div>
     <div class="col-md-6">
         If you have deployed a VM through the  
-        <a href="{{ site.aka_url }}">Azure AI Gallery</a>, all the steps below have already been performed and your database on that machine has all the resulting tables and stored procedures.  You can explore this solution in more detail by examining the folders and running Python or stored procedures to re-create the model, or skip to trying out the model in the included [Jupyter notebook](jupyter.html).
+        <a href="{{ site.aka_url }}">Azure AI Gallery</a>, all the steps below have already been performed and your database on that machine has all the resulting tables and stored procedures.  You can explore this solution in more detail by examining the folders and running Python or stored procedures to re-create the model, or skip to trying out the model in the included <a href="jupyter.html">Jupyter notebook</a>.
     </div>
 </div>
 
@@ -55,7 +55,7 @@ This will make the following modification to your SQL Server:
 * Reconfigures SQL Server to allow running of external scripts.
 * Updates SQL Server version of Python to match the standalone ML Server Python version.
 * Enables firewall access for FILESTREAM
-* Enables FILESTREAM at the SQL instance level as described [here](https://docs.microsoft.com/en-us/sql/relational-imagesbases/blob/enable-the-prerequisites-for-filetable).
+* Enables FILESTREAM at the SQL instance level as described [here](https://docs.microsoft.com/en-us/sql/relational-databases/blob/enable-the-prerequisites-for-filetable?view=sql-server-2017).
 * Copies the Resnet model needed for this solution into the correct directory.
 * Clones the solution code and data into the c:\Solutions\{{ site.folder_name }} directory.
 * Installs the image_similarity Python package.
