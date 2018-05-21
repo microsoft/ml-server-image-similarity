@@ -2,6 +2,10 @@
 layout: default
 title: HOME
 ---
+<div class="alert alert-warning cig">
+Are you unable to connect to your Virtual Machine? See this important information for
+<a href="https://blogs.technet.microsoft.com/mckittrick/unable-to-rdp-to-virtual-machine-credssp-encryption-oracle-remediation/">how to resolve.</a>
+</div>
 
 This template describes how to build and deploy an image similarity solution with  [SQL Server Machine Learning Services with Python](https://docs.microsoft.com/en-us/sql/advanced-analytics/python/sql-server-python-services).
 
