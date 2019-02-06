@@ -1,7 +1,7 @@
 author:
         name: Microsoft
 
-description: Use SQL Server 2017 + ML Services with Python to execute a transfer learning algorithm to detect image similarity.
+description: Use SQL Server + ML Services with Python to execute a transfer learning algorithm to detect image similarity.
 
 # names
 solution_name: Image Similarity
@@ -10,6 +10,8 @@ db_name: ImageSimilarity
 ps1_name: SetupVM.ps1
 jupyter_name: Train Model.ipynb
 
+cig_text: SQL Server VM on Azure
+onp_text: SQL Server On-Premises 
 
 # urls
 code_url: "https://github.com/Microsoft/ml-server-image-similarity"

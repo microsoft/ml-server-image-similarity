@@ -15,7 +15,7 @@ The users of this solution are welcome to use their own dataset. The end to end 
 
 For customers who prefer an on-premise solution, the implementation with Microsoft Machine Learning Services is a great option that takes advantage of the powerful combination of SQL Server and the Python languages. We have modeled the steps in the template after a realistic team collaboration on a data science process. Data scientists do the data preparation, model training, and evaluation from their favorite IDE. DBAs can take care of the deployment using SQL stored procedures with embedded code.  We also show how each of these steps can be executed on a SQL Server client environment such as SQL Server Management Studio. A Windows PowerShell script that executes the end-to-end setup and modeling process is provided for convenience. 
 
-This solution starts with data stored in SQL Server.  The data scientist works from the convenience of an IDE on her client machine, while <a href="https://msdn.microsoft.com/en-us/library/mt604885.aspx">setting the computation context to SQL</a>.  When she is done, her code is operationalized as stored procedures in the SQL Database.
+This solution starts with data stored in SQL Server.  The data scientist works from the convenience of an IDE on her client machine, while <a href="https://docs.microsoft.com/en-us/sql/advanced-analytics/r/sql-server-r-services">setting the computation context to SQL</a>.  When she is done, her code is operationalized as stored procedures in the SQL Database.
 
 A small Jupyter notebook **Test Model.ipynb** is used to submit a new image and see the 10 most similar images returned from the model.
 
