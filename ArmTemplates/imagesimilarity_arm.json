@@ -223,7 +223,7 @@
       "properties": {
         "mode": "incremental",
         "templateLink": {
-          "uri": "https://raw.githubusercontent.com/Microsoft/ml-server-images-similarity/master/ArmTemplates/configure_arm.json",
+          "uri": "https://raw.githubusercontent.com/Microsoft/ml-server-image-similarity/master/ArmTemplates/configure_arm.json",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
