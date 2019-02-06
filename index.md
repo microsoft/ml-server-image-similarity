@@ -20,7 +20,7 @@ This solution starts with data stored in SQL Server.  The data scientist works f
 A small Jupyter notebook **Test Model.ipynb** is used to submit a new image and see the 10 most similar images returned from the model.
 
 <div class="alert alert-warning">
-If you deployed this solution from the <a href="({{ site.aka_url }}">Azure AI Gallery</a>, there was one final step to complete on the VM.  <a href="first_time.html">Click here to learn more</a>.
+If you deployed this solution using the `Deploy to Azure` button on the <a href="quick.html">Quick Start</a> page, there was one final step to complete on the VM.  <a href="first_time.html">Click here to learn more</a>.
 </div>
 
 

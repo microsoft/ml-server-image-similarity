@@ -19,8 +19,7 @@ title: PowerShell Instructions
         </div>
     </div>
     <div class="col-md-6">
-        If you have deployed a VM through the  
-        <a href="{{ site.aka_url }}">Azure AI Gallery</a>, all the steps below have already been performed and your database on that machine has all the resulting tables and stored procedures.  You can explore this solution in more detail by examining the folders and running Python or stored procedures to re-create the model, or skip to trying out the model in the included <a href="jupyter.html">Jupyter notebook</a>.
+        If you have deployed a VM using the `Deploy to Azure` button on the <a href="quick.html">Quick Start</a> page, all the steps below have already been performed and your database on that machine has all the resulting tables and stored procedures.  You can explore this solution in more detail by examining the folders and running Python or stored procedures to re-create the model, or skip to trying out the model in the included <a href="jupyter.html">Jupyter notebook</a>.
     </div>
 </div>
 

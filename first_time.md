@@ -3,9 +3,9 @@ layout: default
 title: HOME
 ---
 
-## Azure AI Gallery Deployment
+## `Deploy to Azure` Deployment
 
-If you deployed this solution from the [Azure AI Gallery]({{ site.aka_url }}), there was one final step to complete the first time you log onto the VM. The command prompt should be opened on the VM, and you must respond YES to download images and complete the solution workflow.
+If you deployed this solution using the `Deploy to Azure` button on the [Quick Start](quick.html) page, there was one final step to complete the first time you log onto the VM. The command prompt should be opened on the VM, and you must respond YES to download images and complete the solution workflow.
 
 <img src="images/prompt.png" > 
 
