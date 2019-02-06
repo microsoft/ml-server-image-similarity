@@ -37,7 +37,7 @@
         "autoUpgradeMinorVersion": false,
         "settings": {
           "fileUris": [
-            "https://raw.githubusercontent.com/Microsoft/ml-server-image-similarity/master/Resources/ActionScripts/ImageSimilaritySetup.ps1"
+            "https://raw.githubusercontent.com/Microsoft/ml-server-image-similarity/master/resources/ActionScripts/ImageSimilaritySetup.ps1"
           ],
           "commandToExecute": "[concat('powershell.exe -ExecutionPolicy Unrestricted -File ImageSimilaritySetup.ps1 -serverName ',  parameters('vmName') ,' -username ',parameters('adminUsername'),' -password ',parameters('adminPassword'))]"
         }
