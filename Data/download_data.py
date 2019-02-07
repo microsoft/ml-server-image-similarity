@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-import urllib.request
+import urllib2
 
 def download_and_place(type, link, data_dir, index):
     print("Downloading: type: {0}, link: {1}, data_dir: {2}, index: {3}".format(type,link,data_dir,index))
@@ -12,7 +12,11 @@ def download_and_place(type, link, data_dir, index):
         print("Already downloaded image: " + link)
     else:
         try:
-            urllib.request.urlretrieve(link, dstPath)
+            resp = urllib2.urlopen(link)
+            with open(dstPath, "wb") as f:
+                f.write(resp.read())
+                
+            #urllib.request.urlretrieve(link, dstPath)
             #img = imread(dstPath)
             #assert(img is not None) # test if image was loaded correctly
             #print("Downloaded image {:4}: {}".format(index, link))
