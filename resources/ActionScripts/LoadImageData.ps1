@@ -1,7 +1,10 @@
 param(
 [parameter(Mandatory=$false, Position=1)]
 [ValidateNotNullOrEmpty()] 
-[string]$isDeploy
+[string]$isDeploy,
+[parameter(Mandatory=$false, Position=2)]
+[ValidateNotNullOrEmpty()] 
+[string]$Prompt
 )
 
 
@@ -15,9 +18,11 @@ This script will download all images listed in ""c:\Solutions\ImageSimilarity\fa
 onto your machine, upload them to SQL and execute the end-to-end workflow to train an image similarity model.
 This portion of the script will take about 6 minutes to complete.
 "
+if($Prompt -ne "N")
+{
 $Install = Read-Host -Prompt "Please respond YES to continue"
-
-If($Install -eq "Yes" -or $Install -eq "Y")
+}
+If($Install -eq "Yes" -or $Install -eq "Y" or $Prompt -eq "N")
 {
     $setupLog = "c:\tmp\setup_log.txt"
     Start-Transcript -Path $setupLog -Append

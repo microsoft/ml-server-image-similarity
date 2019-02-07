@@ -227,7 +227,7 @@ Write-Host "Done with configuration changes to SQL Server"
 Remove-Item  "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\$Shortcut" -ErrorAction SilentlyContinue
 
 #$LoadImageData  = "C:\Solutions\$SolutionName\Resources\ActionScripts\LoadImageData.ps1  $isDeploy"
-$LoadImageData  = "$ScriptPath\LoadImageData.ps1  $isDeploy"
+$LoadImageData  = "$ScriptPath\LoadImageData.ps1  $isDeploy $Prompt"
 
 
 ##Create Shortcuts and Autostart Help File 
