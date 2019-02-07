@@ -90,13 +90,14 @@ Write-Host ("
 
 ##Remove Run Once
 Remove-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\RunOnce.cmd" -ErrorAction SilentlyContinue
+if($Prompt -ne "N")
+{
+    Read-Host ("
+    Images have been loaded into SQL and the model has been trained and the data has been scored. 
 
-Read-Host ("
-Images have been loaded into SQL and the model has been trained and the data has been scored. 
 
-
-Press the Enter Key to continue")
-
+    Press the Enter Key to continue")
+}
 Start-Process https://microsoft.github.io/ml-server-image-similarity/
 
  
