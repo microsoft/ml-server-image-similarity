@@ -3,6 +3,7 @@ import pandas as pd
 import urllib.request
 
 def download_and_place(type, link, data_dir, index):
+    print("Downloading: type: {0}, link: {1}, data_dir: {2}, index: {3}".format(type,link,data_dir,index))
     if not os.path.exists(os.path.join(data_dir, type)):
         os.makedirs(os.path.join(data_dir, type))
 
@@ -35,3 +36,4 @@ def download_all(imgUrlFile, dstDataLoc):
 
 if __name__ == "__main__":
     download_all("../data/fashion_texture_urls.tsv","../data")
+    print("Downloaded all images. Moving to the next step.")
