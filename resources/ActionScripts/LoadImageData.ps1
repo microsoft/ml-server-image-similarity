@@ -22,7 +22,7 @@ if($Prompt -ne "N")
 {
 $Install = Read-Host -Prompt "Please respond YES to continue"
 }
-If($Install -eq "Yes" -or $Install -eq "Y" or $Prompt -eq "N")
+If($Install -eq "Yes" -or $Install -eq "Y" -or $Prompt -eq "N")
 {
     $setupLog = "c:\tmp\setup_log.txt"
     Start-Transcript -Path $setupLog -Append
